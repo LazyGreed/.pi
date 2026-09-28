@@ -1,0 +1,12 @@
+{
+  "providers": {
+    "openai-codex": {
+      "modelOverrides": {
+        "gpt-6-luna": {
+          "contextWindow": 150000,
+            "maxTokens": 32768
+        }
+      }
+    }
+  }
+}

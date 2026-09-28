@@ -1,0 +1,19 @@
+{
+  "widget": {
+    "shortcut": ""
+  },
+  "typesafeBackend": "openrouter",
+  "typesafe": true,
+  "conscience": {
+    "enabled": true,
+    "maxAssessments": 1,
+    "maxNudges": 1
+  },
+  "mode": "steer",
+  "maxRequests": 1000,
+  "slop": {
+    "prose": {
+      "enabled": true
+    }
+  }
+}
