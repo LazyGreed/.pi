@@ -2,6 +2,7 @@
   "widget": {
     "shortcut": ""
   },
+  "enabled": true,
   "typesafeBackend": "openrouter",
   "typesafe": true,
   "conscience": {
@@ -10,10 +11,25 @@
     "maxNudges": 1
   },
   "mode": "steer",
+  "timeoutMs": 5000,
   "maxRequests": 1000,
+  "action": {
+    "enabled": true,
+    "failOpen": true
+  },
   "slop": {
-    "prose": {
-      "enabled": true
-    }
+    "enabled": true
+  },
+  "rules": {
+    "enabled": true
+  },
+  "security": {
+    "enabled": true
+  },
+  "context": {
+    "enabled": true
+  },
+  "subagent": {
+    "enabled": true
   }
 }
