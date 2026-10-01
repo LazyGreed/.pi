@@ -29,15 +29,15 @@ Conversion is a consequence of clarity, trust, relevance, and low friction. Neve
 
 When design goals conflict, optimize in this order:
 
-1. **Task completion** — can the user accomplish the intended task?
-2. **Accessibility** — can users with different abilities, devices, and input methods use it?
-3. **Correctness and transparency** — are consequences, prices, permissions, states, and system behavior clear?
-4. **User control** — can users undo, cancel, go back, change decisions, and recover from errors?
-5. **Information architecture** — is information presented in the sequence needed to make decisions?
-6. **Interaction efficiency** — are unnecessary steps, choices, and repeated inputs removed?
-7. **Responsive behavior** — does the interface adapt appropriately to available space and modality?
-8. **Business and conversion goals** — is the desired action easy without coercion?
-9. **Visual refinement** — does the interface feel cohesive, polished, and intentional?
+1. **Task completion** - can the user accomplish the intended task?
+2. **Accessibility** - can users with different abilities, devices, and input methods use it?
+3. **Correctness and transparency** - are consequences, prices, permissions, states, and system behavior clear?
+4. **User control** - can users undo, cancel, go back, change decisions, and recover from errors?
+5. **Information architecture** - is information presented in the sequence needed to make decisions?
+6. **Interaction efficiency** - are unnecessary steps, choices, and repeated inputs removed?
+7. **Responsive behavior** - does the interface adapt appropriately to available space and modality?
+8. **Business and conversion goals** - is the desired action easy without coercion?
+9. **Visual refinement** - does the interface feel cohesive, polished, and intentional?
 
 Never sacrifice a higher-priority property to improve a lower-priority one.
 

@@ -14,7 +14,23 @@
   If something clearly looks off, even if it is not directly related to what you are doing, try to get it fixed along the way.
 - Apply that same high standard to engineering excellence: lint, test failures, and test flakiness.
   If you see one, even if it is not caused by what you are working on right now, still get it fixed.
-- Before using "dynamic workflows", "ultra code" or any harness feature that immediately spawns a large swarm of subagents, always explain the tradeoffs and ask the user for explicit approval.
+- Before immediately spawning a large swarm of subagents, always explain the tradeoffs and ask the user for explicit approval.
+
+## Subagents
+
+- Delegate only when isolation, specialization, or parallel work materially helps.
+- Prefer the smallest suitable role: tech-lead, engineer, reviewer, qa, researcher.
+- Keep the main agent responsible for orchestration and final synthesis.
+- Do not use subagents for trivial work the main agent can do directly.
+- Parallelize only independent tasks.
+
+## Jev
+
+- Use `jev_evaluate` for bounded semantic classification, relevance, or rubric checks when deterministic checks are insufficient.
+- Use `jev_search` to shortlist candidate files: discover paths first, ask a yes/no question, then read promising files normally.
+  Contents go to Jev, not the coding-model context.
+- Call only when useful.
+  Treat judgments as evidence, not authority; verify with source/tools/tests.
 
 ## Maintaining this file
 

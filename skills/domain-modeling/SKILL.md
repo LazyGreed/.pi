@@ -44,13 +44,13 @@ If sources conflict, surface the conflict. Do not silently choose whichever word
 
 Keep them separate:
 
-- **Term definition** — what a concept means.
-- **Invariant** — what must always be true.
-- **Lifecycle/state transition** — how a concept can change over time.
-- **Relationship/cardinality** — how concepts relate.
-- **Policy** — a changeable product/business decision.
-- **Implementation detail** — how current code realizes the model.
-- **Architectural decision** — a durable implementation/design choice with trade-offs.
+- **Term definition** - what a concept means.
+- **Invariant** - what must always be true.
+- **Lifecycle/state transition** - how a concept can change over time.
+- **Relationship/cardinality** - how concepts relate.
+- **Policy** - a changeable product/business decision.
+- **Implementation detail** - how current code realizes the model.
+- **Architectural decision** - a durable implementation/design choice with trade-offs.
 
 A glossary should not become a dumping ground for implementation details or transient policy.
 
@@ -139,9 +139,9 @@ Regularly remove obsolete synonyms and redundant prose. A good glossary can shri
 
 Create or propose an ADR only when **all three** are true:
 
-1. **Hard to reverse** — changing the decision later has meaningful migration, compatibility, operational, or organizational cost.
-2. **Surprising without context** — a future maintainer is likely to ask why this choice was made.
-3. **Real trade-off** — credible alternatives existed and the choice sacrifices something meaningful.
+1. **Hard to reverse** - changing the decision later has meaningful migration, compatibility, operational, or organizational cost.
+2. **Surprising without context** - a future maintainer is likely to ask why this choice was made.
+3. **Real trade-off** - credible alternatives existed and the choice sacrifices something meaningful.
 
 If any test fails, do not create an ADR.
 

@@ -1,7 +1,8 @@
 {
   "theme": "light/dark",
   "enabledModels": [
-    "openai-codex/gpt-6-luna"
+    "openai-codex/gpt-6-luna",
+    "openai-codex/gpt-6.1-sol"
   ],
   "hideThinkingBlock": true,
   "steeringMode": "all",
@@ -15,21 +16,21 @@
   "doubleEscapeAction": "tree",
   "tuiMode": "fullscreen",
   "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-6-luna",
+  "defaultModel": "gpt-6.1-sol",
   "modelThinkingLevels": {
-    "openai-codex/gpt-6-luna": "max"
+    "openai-codex/gpt-6-luna": "max",
+    "openai-codex/gpt-6.1-sol": "high"
   },
   "compaction": {
     "enabled": true,
     "reserveTokens": 32768,
     "keepRecentTokens": 20000
   },
+  "extensions": ["~/Documents/.pi/extensions/k-jev"],
   "packages": [
     "npm:pi-blackhole",
-    "npm:pi-warden",
     "npm:pi-web-access",
     "npm:@narumitw/pi-chrome-devtools",
-    "npm:@juicesharp/rpiv-ask-user-question",
     "git:github.com/nathanstephenson/pi-subagents",
     "npm:@narumitw/pi-lsp"
   ]

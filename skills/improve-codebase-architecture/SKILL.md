@@ -253,13 +253,13 @@ The module shape encodes terminology or lifecycle assumptions that do not match 
 
 Before promoting a candidate, test it against:
 
-- **Deletion test** — does the abstraction actually concentrate complexity?
-- **Real seam test** — is there demonstrated variation/volatility?
-- **Caller simplification test** — do callers know less afterward?
-- **Locality test** — will future changes touch fewer places?
-- **Test-surface test** — can important behavior be verified through the production interface?
-- **Migration test** — can the old path actually be removed?
-- **Behavior-preservation test** — is the refactor separable from product behavior changes?
+- **Deletion test** - does the abstraction actually concentrate complexity?
+- **Real seam test** - is there demonstrated variation/volatility?
+- **Caller simplification test** - do callers know less afterward?
+- **Locality test** - will future changes touch fewer places?
+- **Test-surface test** - can important behavior be verified through the production interface?
+- **Migration test** - can the old path actually be removed?
+- **Behavior-preservation test** - is the refactor separable from product behavior changes?
 
 Reject candidates that fail most of these.
 
@@ -306,9 +306,9 @@ Each candidate should include:
 - runtime/UI checks if appropriate.
 
 **Confidence**
-- `High` — supported by multiple concrete repository signals.
-- `Medium` — evidence is good but some behavior/constraint remains uncertain.
-- `Low` — plausible, but currently speculative; usually do not implement without more evidence.
+- `High` - supported by multiple concrete repository signals.
+- `Medium` - evidence is good but some behavior/constraint remains uncertain.
+- `Low` - plausible, but currently speculative; usually do not implement without more evidence.
 
 Confidence is evidence quality, not "how much the model likes the idea."
 

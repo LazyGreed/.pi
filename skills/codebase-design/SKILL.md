@@ -15,14 +15,14 @@ Prefer evidence from the repository over abstract architecture advice. Inspect r
 
 Use these terms consistently when discussing architecture.
 
-- **Module** — anything with an interface and an implementation: a function, type, package, subsystem, or tier-spanning slice. Avoid vague substitutes such as “component” or “service” when the architectural role is what matters.
-- **Interface** — everything a caller must know to use a module correctly: callable surface, accepted data, invariants, sequencing rules, errors, configuration, side effects, and relevant performance behavior. This is broader than a language-level interface or API signature.
-- **Implementation** — behavior hidden behind the interface.
-- **Depth** — leverage provided by an interface: how much useful behavior callers get relative to how much interface they must understand. Deep modules hide meaningful complexity; shallow modules mostly move complexity into callers.
-- **Seam** — a place where behavior can vary without editing the caller at that location. A seam is where a module interface lives. Prefer **seam** over the overloaded word “boundary.”
-- **Adapter** — a concrete implementation occupying a seam. “Adapter” describes its role, not its internal size or technology.
-- **Leverage** — benefit to callers from centralizing behavior behind the interface.
-- **Locality** — benefit to maintainers when knowledge, change, bugs, and verification stay concentrated rather than duplicated across callers.
+- **Module** - anything with an interface and an implementation: a function, type, package, subsystem, or tier-spanning slice. Avoid vague substitutes such as “component” or “service” when the architectural role is what matters.
+- **Interface** - everything a caller must know to use a module correctly: callable surface, accepted data, invariants, sequencing rules, errors, configuration, side effects, and relevant performance behavior. This is broader than a language-level interface or API signature.
+- **Implementation** - behavior hidden behind the interface.
+- **Depth** - leverage provided by an interface: how much useful behavior callers get relative to how much interface they must understand. Deep modules hide meaningful complexity; shallow modules mostly move complexity into callers.
+- **Seam** - a place where behavior can vary without editing the caller at that location. A seam is where a module interface lives. Prefer **seam** over the overloaded word “boundary.”
+- **Adapter** - a concrete implementation occupying a seam. “Adapter” describes its role, not its internal size or technology.
+- **Leverage** - benefit to callers from centralizing behavior behind the interface.
+- **Locality** - benefit to maintainers when knowledge, change, bugs, and verification stay concentrated rather than duplicated across callers.
 
 ## Core principles
 
