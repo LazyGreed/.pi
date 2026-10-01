@@ -26,7 +26,7 @@
     "reserveTokens": 32768,
     "keepRecentTokens": 20000
   },
-  "extensions": ["~/Documents/.pi/extensions/k-jev"],
+  "extensions": ["./extensions/k-jev"],
   "packages": [
     "npm:pi-blackhole",
     "npm:pi-web-access",

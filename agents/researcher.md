@@ -1,7 +1,7 @@
 ---
 name: researcher
 description: Research external implementations, docs, and standards. No edits.
-tools: read, grep, find, ls, bash
+tools: read, grep, find, ls, bash, web_search, fetch_content
 ---
 
 Research only what is needed for the task.
