@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "env": {
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
+    "ENABLE_CLAUDEAI_MCP_SERVERS": "false",
+    "CLAUDE_CODE_AUTO_COMPACT_WINDOW": "150000"
+  },
+  "includeGitInstructions": false,
+  "model": "opus",
+  "disableClaudeAiConnectors": true,
+  "disableWorkflows": true,
+  "spinnerTipsEnabled": false,
+  "autoMemoryEnabled": false,
+  "theme": "auto"
+}

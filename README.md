@@ -28,9 +28,13 @@ Pi uses the native `k-jev` adapter.
 
 ## Claude Code
 
+Configuration:
+
+- `claude-settings.json` - should replace `~/.claude/settings.json`
+
 Claude Code reuses the same:
 
-- `AGENTS.md`
+- `AGENTS.md` - should rename to `~/.claude/CLAUDE.md`
 - skills
 - agent roles
 - `k-jev` core
@@ -39,10 +43,10 @@ Recommended setup:
 
 ```text
 ~/.claude/
-├── CLAUDE.md -> ~/.pi/agent/AGENTS.md
-├── skills -> ~/.pi/agent/skills
-├── agents/
-└── settings.json
+├── CLAUDE.md -> AGENTS.md
+├── skills -> skills
+├── agents/  # update tool names to uppercase and find/ls -> Glob
+└── settings.json -> claude-settings.json
 ```
 
 `k-jev` is exposed to Claude Code through a local stdio MCP server.
