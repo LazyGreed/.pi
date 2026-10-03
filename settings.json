@@ -27,7 +27,7 @@
     "keepRecentTokens": 20000
   },
   "packages": [
-    "~/src/k-jev",
+    "./extensions/k-jev",
     "npm:pi-blackhole",
     "npm:pi-web-access",
     "npm:@narumitw/pi-chrome-devtools",

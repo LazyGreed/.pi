@@ -7,7 +7,7 @@ Personal coding-agent configuration shared across Pi and Claude Code.
 - `AGENTS.md` - global agent instructions
 - `skills/` - reusable agent skills
 - `agents/` - small role-specific subagents
-- `~/src/k-jev/` - standalone shared semantic evaluation and file-search package
+- `extensions/k-jev/` - shared semantic evaluation and file-search package
 
 ## Pi
 
@@ -47,7 +47,7 @@ Recommended setup:
 
 `k-jev` is exposed to Claude Code through a local stdio MCP server.
 
-See `~/src/k-jev/README.md` for Pi and Claude setup.
+See [`extensions/k-jev/README.md`](extensions/k-jev/README.md) for Pi and Claude setup.
 
 ## Philosophy
 
