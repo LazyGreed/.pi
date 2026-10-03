@@ -26,11 +26,22 @@
 
 ## Jev
 
-- Use `jev_evaluate` for bounded semantic classification, relevance, or rubric checks when deterministic checks are insufficient.
-- Use `jev_search` to shortlist candidate files: discover paths first, ask a yes/no question, then read promising files normally.
-  Contents go to Jev, not the coding-model context.
-- Call only when useful.
-  Treat judgments as evidence, not authority; verify with source/tools/tests.
+Use Jev for semantic judgment. This is mandatory, not optional.
+
+- Use `jev_search` when locating or ranking relevant code/docs requires semantic relevance, especially across unfamiliar or multiple files.
+- Use `jev_evaluate` when judging meaning, intent, quality, alignment, architecture, tradeoffs, ambiguity, categorization, or whether an implementation satisfies requirements.
+- Reviews, refactors, architecture work, spec/code alignment, and documentation/product-boundary checks MUST use Jev at least once when they involve semantic judgment.
+- Green CI, tests, `rg`, source inspection, or runtime checks do not replace Jev for semantic judgment.
+  They establish deterministic facts; Jev evaluates meaning.
+- If two reasonable reviewers could disagree based on interpretation rather than an exact fact, use `jev_evaluate`.
+- If you do not know which sources matter without reading many candidates, use `jev_search` before broad reads.
+- Do not use Jev for exact lookups, syntax, mechanical verification, known-path reads, or facts deterministically answered by tools.
+- Read and verify selected source normally after Jev. Jev output is evidence, not authority.
+- Batch independent Jev questions when practical.
+- If Jev is required but unavailable or fails, say so explicitly and continue with the strongest deterministic evidence available.
+  Never silently skip it.
+
+Before finishing any non-trivial review or analysis, check: **Did this task require semantic judgment? If yes and no Jev call was made, use Jev before answering.**
 
 ## Maintaining this file
 
