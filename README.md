@@ -1,15 +1,62 @@
-# My pi.dev setup
+# My Agent setup
 
-Personal [pi](https://pi.dev) configuration, model settings, extensions, and skills.
+Personal coding-agent configuration shared across Pi and Claude Code.
 
-## pi packages
+## Shared
 
-- npm:pi-blackhole
-- npm:pi-web-access
-- npm:@narumitw/pi-chrome-devtools
-- npm:@narumitw/pi-lsp
-- npm:pi-subagents
+- `AGENTS.md` - global agent instructions
+- `skills/` - reusable agent skills
+- `agents/` - small role-specific subagents
+- `~/src/k-jev/` - standalone shared semantic evaluation and file-search package
 
-## Local extensions
+## Pi
 
-- [k-jev](extensions/k-jev/README.md): opt-in semantic evaluation and content-free file search.
+Configuration:
+
+- `settings.json`
+- `models.json`
+
+Packages:
+
+- `pi-blackhole`
+- `pi-web-access`
+- `@narumitw/pi-chrome-devtools`
+- `@narumitw/pi-lsp`
+- `pi-subagents`
+
+Pi uses the native `k-jev` adapter.
+
+## Claude Code
+
+Claude Code reuses the same:
+
+- `AGENTS.md`
+- skills
+- agent roles
+- `k-jev` core
+
+Recommended setup:
+
+```text
+~/.claude/
+├── CLAUDE.md -> ~/.pi/agent/AGENTS.md
+├── skills -> ~/.pi/agent/skills
+├── agents/
+└── settings.json
+```
+
+`k-jev` is exposed to Claude Code through a local stdio MCP server.
+
+See `~/src/k-jev/README.md` for Pi and Claude setup.
+
+## Philosophy
+
+Keep the agent environment small.
+
+Prefer:
+
+- built-in capabilities over plugins
+- shared configuration over duplicated configuration
+- explicit tools over automatic behavior
+- few specialized agents over large agent collections
+- local, direct workflows over orchestration layers
