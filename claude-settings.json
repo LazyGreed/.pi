@@ -9,7 +9,25 @@
   "model": "opus",
   "disableClaudeAiConnectors": true,
   "disableWorkflows": true,
+  "workflowKeywordTriggerEnabled": false,
+  "enabledPlugins": {
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true
+  },
   "spinnerTipsEnabled": false,
+  "modelSettings": {
+    "claude-sonnet-5-5": {
+      "effortLevel": "high"
+    },
+    "claude-opus-5-5": {
+      "effortLevel": "medium"
+    }
+  },
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
   "autoMemoryEnabled": false,
-  "theme": "auto"
+  "theme": "auto",
+  "editorMode": "normal"
 }
