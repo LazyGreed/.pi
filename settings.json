@@ -13,6 +13,7 @@
   },
   "enableInstallTelemetry": false,
   "defaultProjectTrust": "always",
+  "defaultTools": ["+codemode"],
   "doubleEscapeAction": "tree",
   "tuiMode": "fullscreen",
   "defaultProvider": "openai-codex",
