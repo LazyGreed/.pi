@@ -7,6 +7,13 @@
 - When making technical decisions, do not give much weight to development cost.
   Instead, prefer quality, simplicity, robustness, scalability, and long term 
   maintainability.
+- Own the affected codebase, not just the ticket. Trace relevant callers,
+  invariant owners, conventions, and ADRs before editing.
+- Prefer the smallest coherent change that preserves behavior and lowers future
+  change cost. Remove directly related duplication or obsolete paths when justified.
+  Record unrelated architectural debt separately; avoid speculative refactors,
+  unnecessary abstractions, and scope creep.
+- At handoff, report meaningful maintenance tradeoffs and remaining risks.
 - For one-off or infrequent operational work, start with the simplest direct 
   end-to-end path. Do not build wrappers, control planes, policy layers, 
   custom verifiers, or automation unless the direct path exposes a concrete 

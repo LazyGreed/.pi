@@ -47,6 +47,17 @@ Before proposing or changing architecture:
 
 Do not redesign a codebase from abstract principles before understanding its current behavior.
 
+## Stewardship in scoped changes
+
+Treat the affected domain as something you will maintain. Completing the
+requested behavior is not enough if the change duplicates a rule, divides
+ownership of an invariant, or leaves an obsolete path. Check the affected
+design and existing contracts before declaring the work complete.
+
+Resolve directly related friction within the smallest coherent change when
+the benefit is concrete. Track unrelated debt separately; do not introduce
+speculative abstractions or expand the task into a redesign.
+
 ## Model the Domain, Not the Storage
 
 Ask:

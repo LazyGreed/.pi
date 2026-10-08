@@ -191,6 +191,18 @@ Prefer:
 
 Do not equate AI-navigability with more files, wrappers, managers, helpers, or micro-modules.
 
+## 9. Stewardship is scoped
+
+Treat the affected architecture as part of completing a scoped task. Before
+changing it, identify ownership, invariants, callers, and relevant ADRs. Check
+whether the change would distribute policy, leak an invariant, introduce a
+needless dependency, or leave a competing path.
+
+Fix directly related design friction only when evidence supports a contained
+improvement. Record unrelated architectural debt for separate work. Do not
+turn ordinary implementation into speculative repository-wide refactoring.
+Passing tests does not, by itself, prove the architecture is sound.
+
 # Review workflow
 
 ## Step 1: Establish the current shape
