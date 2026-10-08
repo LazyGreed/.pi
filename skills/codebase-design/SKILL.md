@@ -174,7 +174,6 @@ For small questions, answer proportionally; do not force the full template.
 
 - Use **domain-modeling** when the problem is terminology, identity, lifecycle meaning, invariants of domain concepts, or ambiguous words.
 - Use a debugging skill when behavior is broken but architecture is not yet shown to be the cause.
-- Use TDD when implementing concrete behavior and a red-green loop is useful.
 - Use repository-specific architecture rules and ADRs over generic advice when they conflict, and surface the conflict explicitly.
 
 ## Source and adaptation

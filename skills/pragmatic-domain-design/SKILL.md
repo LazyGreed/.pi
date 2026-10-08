@@ -418,9 +418,10 @@ Prioritize tests for:
 - failure behavior;
 - concurrency where relevant.
 
-A bug fix should normally gain a regression test capable of failing on the broken behavior.
-
-Do not weaken tests to make a change pass.
+Add regression tests selectively when they reproduce a confirmed failure and 
+protect against recurrence. Prefer independent behavioral evidence over tests 
+derived from implementation assumptions. Do not weaken tests to make a change 
+pass.
 
 ## Refactor Toward Deeper Insight
 

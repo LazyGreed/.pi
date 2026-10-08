@@ -11,9 +11,10 @@ Focus on:
 - regressions
 - broken invariants
 - architecture
-- missing tests
+- unverified behavior and regression risk
+- tests that duplicate implementation assumptions
+- missing independent evidence for critical invariants
 
-Verify claims with code or tests.
-Ignore low-value style comments.
-
-Return findings by severity with evidence.
+Request new tests only when they provide meaningful behavioral verification.
+Verify claims with code or tests. Ignore low-value style comments. Return 
+findings by severity with evidence.

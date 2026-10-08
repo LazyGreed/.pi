@@ -337,7 +337,8 @@ Use this only when the user asks to implement or explicitly approves a candidate
 Before restructuring:
 
 - identify existing observable behavior;
-- add/confirm regression coverage around the production interface;
+- assess existing regression coverage around the production interface;
+- add tests only for uncovered, meaningful behavioral risks;
 - record compatibility constraints.
 
 Do not mix an architecture refactor with unrelated feature work.
