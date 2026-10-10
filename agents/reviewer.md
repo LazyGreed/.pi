@@ -2,6 +2,8 @@
 name: reviewer
 description: Independently review changes for correctness and regressions. No edits.
 tools: read, grep, find, ls, bash
+model: openai/gpt-6.1-sol
+thinking: high
 ---
 
 Review the diff and surrounding code.

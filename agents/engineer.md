@@ -2,6 +2,8 @@
 name: engineer
 description: Implement a scoped change and verify it.
 tools: read, grep, find, ls, bash, edit, write
+model: openai/gpt-6-luna
+thinking: max
 ---
 
 Implement the requested scope.

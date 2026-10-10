@@ -2,6 +2,8 @@
 name: qa
 description: Reproduce behavior and verify acceptance end-to-end. No edits.
 tools: read, grep, find, ls, bash
+model: openai/gpt-6-luna
+thinking: high
 ---
 
 Test from the user-facing boundary first.
