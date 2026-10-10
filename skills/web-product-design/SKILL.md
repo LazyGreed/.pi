@@ -2,155 +2,103 @@
 name: web-product-design
 description: >
   Design and audit production web interfaces with strong information
-  architecture, interaction design, accessibility, responsive behavior,
-  visual hierarchy, usability, trust, and ethical conversion optimization.
-  Use for SaaS applications, dashboards, admin interfaces, onboarding,
-  forms, pricing, landing pages, e-commerce, checkout, and other web
-  product experiences.
+  architecture, decision support, interaction design, accessibility,
+  responsiveness, visual hierarchy, usability, trust, and ethical conversion.
+  Use for SaaS applications, dashboards, admin tools, onboarding, forms,
+  pricing, landing pages, e-commerce, booking, checkout, and other web products.
 triggers:
   - Designing or auditing web application interfaces
   - Designing SaaS dashboards, admin panels, or settings
   - Designing forms, onboarding, signup, or account creation flows
   - Designing landing pages, pricing pages, or conversion funnels
-  - Designing e-commerce product, cart, or checkout experiences
+  - Designing product discovery, filtering, comparison, booking, or checkout
   - Reviewing responsive behavior, accessibility, hierarchy, or usability
-  - Improving an existing product interface without unnecessary redesign
+  - Improving an existing interface without unnecessary redesign
 ---
 
 # Web Product Design
 
-Design web interfaces around user tasks, comprehension, accessibility, predictable interaction, and product goals.
-
-Good product design does not maximize clicks. It helps users understand where they are, what they can do, what will happen next, and how to complete their task with minimal unnecessary effort.
-
-Conversion is a consequence of clarity, trust, relevance, and low friction. Never improve a business metric by making the interface less truthful, accessible, understandable, or controllable.
+Design around tasks and decisions, not component galleries or polished screenshots. Users should understand where they are, what choices mean, what happens next, and how to recover. Business success follows from relevance, clarity, trust, and low unnecessary friction, not coercion.
 
 ## Decision Priority
 
-When design goals conflict, optimize in this order:
+When goals conflict, prioritize in order:
 
-1. **Task completion** - can the user accomplish the intended task?
-2. **Accessibility** - can users with different abilities, devices, and input methods use it?
-3. **Correctness and transparency** - are consequences, prices, permissions, states, and system behavior clear?
-4. **User control** - can users undo, cancel, go back, change decisions, and recover from errors?
-5. **Information architecture** - is information presented in the sequence needed to make decisions?
-6. **Interaction efficiency** - are unnecessary steps, choices, and repeated inputs removed?
-7. **Responsive behavior** - does the interface adapt appropriately to available space and modality?
-8. **Business and conversion goals** - is the desired action easy without coercion?
-9. **Visual refinement** - does the interface feel cohesive, polished, and intentional?
+1. **Task completion** - the task is discoverable and possible.
+2. **Accessibility** - the task works across relevant abilities, devices, and input modes.
+3. **Correctness and transparency** - states, consequences, prices, data, permissions, and limitations are true.
+4. **User control** - users can reverse, cancel, revise, recover, and navigate.
+5. **Information architecture** - required context appears before the decision.
+6. **Interaction efficiency** - remove needless steps, backtracking, and uncertainty.
+7. **Responsive behavior** - adapt content priority and interaction, not just widths.
+8. **Legitimate business goals** - make worthwhile actions easy without manipulation.
+9. **Visual refinement** - align typography, shapes, spacing, and brand expression.
 
-Never sacrifice a higher-priority property to improve a lower-priority one.
+Never sacrifice a higher-priority property to improve a lower one.
 
-## Core Rules
+## Work at Three Levels
 
-- Start from the user's task, not from a component library or visual style.
-- Accessibility is a design constraint, not a final QA pass.
-- Design loading, empty, partial, error, success, and disabled states, not only the happy path.
-- Responsive design is adaptation, not desktop shrinking.
-- Prefer existing design-system primitives over one-off components.
-- Prefer recognition over recall and visible system state over hidden state.
-- Do not improve conversion by obscuring cost, manufacturing urgency, making rejection difficult, or reducing informed choice.
-- Do not recommend additional UI unless it removes greater complexity elsewhere.
-- Prefer observed product evidence over generic behavioral heuristics.
-- Do not redesign functioning UI merely to make it different.
+- **Principle:** what must remain true (e.g., item details legible regardless of photography).
+- **Constraint:** what the real product must handle (mixed image quality, stale counts, mobile keyboards, localization, permissions).
+- **Pattern:** one possible implementation (separate media/text, scrim, card/list toggle, live count). Do not elevate a single pattern to a universal law.
+
+### Decision-support lens
+
+- **Explore:** create relevance and clear entry points. Imagery matters when appearance drives interest.
+- **Compare:** align attributes, costs, times, alternatives, and constraints; rows and tables can beat visual cards.
+- **Act:** expose selected state, exact consequence, primary action, and undo/recovery.
+- **Revise:** make trade-offs visible before commitment where reliable data permits; preserve selections and context.
+
+An elaborate Staff-style interface is not automatically better. Each count, chart, badge, personalized rank, filter, recommendation, alternate view, or calculation needs a decision it demonstrably improves.
 
 ## Workflow
 
-1. Identify the primary user, task, and success condition.
-2. Identify the information and decisions required before the primary action.
-3. Establish information architecture and action hierarchy.
-4. Design interaction behavior and system states.
-5. Check accessibility and responsive behavior.
-6. Apply domain-specific patterns only where relevant.
-7. Audit trust, content clarity, consistency, and performance.
-8. Optimize conversion only after usability and transparency are sound.
-9. Polish visuals last.
+1. Identify primary user, task, intent, success state, and critical constraints.
+2. Observe the current path; map decisions, comparisons, reversals, and failure cases.
+3. Identify evidence available from product behavior, research, and analytics; mark unknowns.
+4. Design information architecture, grouping, content priority, and action hierarchy.
+5. Specify interactions, error handling, dynamic data semantics, and feedback.
+6. Validate keyboard, semantics, contrast, zoom, reduced motion, and touch.
+7. Adapt for viewport, localization, content extremes, and mobile keyboards.
+8. Apply only domain patterns justified by the specific task.
+9. Audit trust, performance, operational feasibility, and conversion ethics.
+10. Test the whole journey, not only screenshot aesthetics; polish last.
 
-## Principles vs Patterns
+## Core Rules
 
-Separate the principle from its implementation.
-
-**Principle** → what must remain true.  
-**Constraint** → what the design must handle.  
-**Pattern** → one possible implementation.
-
-Example:
-
-- Principle: controls over media must remain legible.
-- Constraints: media may be bright, dark, detailed, or user-generated.
-- Patterns: scrim, solid control surface, translucent surface, adaptive foreground, safe media zones, or moving controls outside the media.
-
-Do not hardcode one visual pattern when multiple patterns satisfy the principle.
-
-## Load Additional Guidance
-
-Read the smallest set of references relevant to the task.
-
-- Core IA, hierarchy, layout, density, progressive disclosure, consistency → `references/foundations.md`
-- Interaction states, async behavior, dialogs, destructive actions, feedback, motion → `references/interaction-and-state.md`
-- Keyboard, focus, semantics, contrast, zoom, reduced motion, targets → `references/accessibility.md`
-- Responsive behavior, touch, sticky UI, overflow, mobile keyboards → `references/responsive.md`
-- Forms, validation, defaults, errors, labels, interface copy → `references/forms-and-content.md`
-- Dashboards, admin UI, tables, search, filtering, operational density → `references/dashboards-and-data.md`
-- Onboarding, pricing, behavioral UX, e-commerce, cart, checkout → `references/commerce-and-conversion.md`
-- Reviews, severity, output format, recommendation discipline → `references/audit.md`
+- Start from the user's task and existing product constraints, not trends.
+- Put information required for a decision near that decision. Expose common controls; disclose advanced complexity.
+- Preserve scan hierarchy with proximity, typography, alignment, spacing, and emphasis before decoration.
+- Prefer design-system tokens and existing components. Avoid shape-language drift.
+- Treat Hick-Hyman, Gestalt, number of tabs, font-size counts, and above-the-fold rules as heuristics, not laws.
+- Use trustworthy, labeled product data for counts, distribution, rankings, recommendations, and estimates.
+- Show loading, empty, partial, stale, error, success, disabled, and permission-limited states where applicable.
+- Do not create new UI unless it reduces greater complexity elsewhere.
+- Do not use unverified badges, inflated claims, misleading pricing, manufactured urgency, or default financial commitments.
+- Do not redesign a functioning interface purely to make it look different.
 
 ## Evidence Discipline
 
-Do not invent behavioral or usability statistics.
+Do not invent behavioral statistics, conversion multipliers, guarantees, user needs, usage rankings, inventory, or research findings. Prefer evidence roughly in this order: observed behavior; usability testing; analytics; user research; established accessibility/usability guidance; applicable industry research; heuristics; intuition. Distinguish observation, established guideline, product evidence, and hypothesis. When data is unavailable, use a conservative fallback and mark it as a hypothesis to validate.
 
-Treat behavioral effects as directional heuristics, not universal laws. Prefer evidence in this order:
+## Load the Smallest Relevant References
 
-1. observed product behavior
-2. usability testing
-3. product analytics
-4. user research
-5. established accessibility/usability guidance
-6. relevant industry research
-7. general behavioral heuristics
-8. designer intuition
+- Task modeling, decision architecture, Gestalt, type, hierarchy, density, visual polish, navigation: `references/foundations.md`
+- Interaction states, async feedback, dialogs, recovery, motion: `references/interaction-and-state.md`
+- Semantics, keyboard, contrast, zoom, targets, reduced motion: `references/accessibility.md`
+- Mobile anatomy, bottom navigation, sticky actions, safe areas, overflow: `references/responsive.md`
+- Forms, validation, labels, defaults, microcopy: `references/forms-and-content.md`
+- Dashboards, tables, filtering, distributions, metrics, operational density: `references/dashboards-and-data.md`
+- Commerce, discovery, variants, subscriptions, checkout, booking, ethical conversion: `references/commerce-and-conversion.md`
+- Reviews, evaluation, severity, recommendations: `references/audit.md`
+- Motion prototypes, nested scrolling, Figma, 3D, AI, handoff: `references/prototyping-and-handoff.md`
 
-When product data exists, use it to determine defaults, ordering, presets, prioritization, and common workflows.
+Do not load every reference for a simple task.
 
-Distinguish clearly between an observed problem, established guideline, product-specific evidence, and a design hypothesis.
+## Common AI Failure Modes
 
-## Common AI Design Failure Modes
-
-Do not automatically solve problems by adding another:
-
-- card
-- badge
-- pill
-- tooltip
-- modal
-- gradient
-- section
-- icon
-- animation
-- floating control
-
-Prefer removing unnecessary complexity.
-
-Do not:
-
-- turn every setting into a card
-- turn simple lists into dashboards
-- replace useful tables with cards merely to look modern
-- hide important information to create visual minimalism
-- make every application look like a marketing page
-- prioritize screenshot aesthetics over interaction quality
-- create new component variants just to make one screen distinct
+Avoid automatically adding another card, pill, badge, shadow, gradient, tooltip, modal, icon, animation, or dashboard metric. Do not turn tables into cards for fashion; hide essential functions for minimalism; make operational software look like a landing page; impose touch-size density on all desktop tools; or use 3D because prototyping permits it. Choose the simplest coherent pattern that satisfies the actual task.
 
 ## Final Check
 
-Before shipping or recommending a design, verify:
-
-- The primary task is obvious and completable.
-- Necessary information appears before the decision that depends on it.
-- Interaction states are specified.
-- Keyboard and focus behavior are sound.
-- The interface adapts across relevant viewport sizes and input modes.
-- Costs, permissions, destructive consequences, and recurring commitments are clear.
-- Existing system components are reused where possible.
-- Conversion improvements preserve informed user choice.
-- New UI exists only where it removes more complexity than it introduces.
+Before shipping, verify task success; decision context and consequences; true data and prices; suitable feedback and recovery; keyboard and focus; touch, zoom, localization, and safe areas; actual performance; consistency with existing design system; and no extra UI without proven purpose. Validate the complete flow with realistic data, failures, and at least one reversal.

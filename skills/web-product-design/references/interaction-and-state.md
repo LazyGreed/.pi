@@ -2,158 +2,31 @@
 
 ## Interaction Contract
 
-Every interactive element should communicate:
+Every control needs clear affordance, meaning, current state, input acknowledgement, success feedback, and a recoverable failure path. A screenshot is incomplete when interaction outcomes are unknown.
 
-1. that it is interactive
-2. what it does
-3. its current state
-4. whether the action succeeded
-5. what happens when something fails
+Specify relevant default, hover, focus, pressed, selected, checked, disabled, loading, success, warning, error, empty, unavailable, stale, partial, and read-only states. Hover is supplemental, never essential.
 
-A static mockup is incomplete if important states are unspecified.
+## Async Feedback
 
-## Required States
+- Acknowledge input immediately; prevent accidental duplicates and retain context while loading.
+- Distinguish queued, in-progress, complete, partly complete, failed, and stale data when they matter.
+- Keep useful partial content visible during a partial outage. Explain empty results versus no existing data.
+- Preserve valid user input after errors; use actionable inline errors and visible recovery.
+- Announce important completion and errors accessibly without announcing every background update.
+- Live inventory, prices, and counts may change. When freshness matters, label estimates/cached values and avoid presenting obsolete values as current.
 
-Consider, where applicable:
+## Overlays and Navigation
 
-- default
-- hover
-- focus
-- active / pressed
-- selected
-- checked
-- disabled
-- loading
-- success
-- warning
-- error
-- empty
-- unavailable
-- partial
-- read-only
+Use a dialog, drawer, popover, or bottom sheet only when it preserves useful context better than a navigable page. Long, deep, shareable, or comparison-heavy workflows usually deserve a page. Avoid nested modals. Manage initial focus, Escape where appropriate, return focus, and browser navigation consistently.
 
-Hover is supplemental. Essential functionality must not depend on it.
+## Destructive Actions and Optimism
 
-## Feedback
-
-Actions should produce immediate perceivable feedback.
-
-For asynchronous actions:
-
-- acknowledge input immediately
-- prevent accidental duplicate submission
-- preserve context while loading
-- indicate completion
-- expose recovery when failure occurs
-
-Avoid interfaces where clicking a control appears to do nothing.
-
-## State Design
-
-Design beyond the happy path.
-
-### Loading
-What does the user see while data is unavailable? Prefer maintaining layout and context rather than blanking the entire screen.
-
-### Empty
-Explain what normally appears, why nothing appears now when relevant, and the most useful next action.
-
-### Partial
-Show usable data when only some sources fail. Do not block an entire screen if meaningful work can continue.
-
-### Error
-Explain what failed and how to recover. Preserve valid user input and context.
-
-### Success
-Confirm the result when completion would otherwise be ambiguous.
-
-### Permission-limited
-Explain why an action is unavailable rather than silently disabling it when the reason matters.
-
-### Offline / disconnected
-Where relevant, preserve work or clearly explain what cannot be done.
-
-### Stale data
-Help users distinguish current data from stale or cached data when that distinction matters.
-
-## Empty States
-
-Useful empty states may communicate:
-
-1. what normally appears here
-2. why nothing appears now
-3. the most relevant next action
-
-Do not fill every empty state with illustrations or marketing copy. Operational products usually benefit from concise explanatory text.
-
-## Modals, Drawers, Popovers, and Overlays
-
-Use overlays when maintaining the current page context is important.
-
-Good uses:
-
-- short confirmation
-- small focused edit
-- contextual detail
-- lightweight secondary workflow
-
-Avoid overlays when:
-
-- the workflow is long
-- deep navigation is needed
-- content should be bookmarkable
-- multiple nested steps are involved
-- users need to compare large amounts of underlying content
-
-Avoid nested modals.
-
-Dialogs should have a clear title, manage focus correctly, support keyboard dismissal where appropriate, return focus sensibly after closing, and make destructive consequences explicit.
-
-## Destructive Actions
-
-Match protection to consequence severity.
-
-- Reversible low-risk action → prefer undo.
-- Consequential action → explicit confirmation may be appropriate.
-- Highly destructive or irreversible action → name the affected resource, explain the consequence, and require intentional confirmation when justified.
-
-Do not add confirmation dialogs to routine actions merely because they modify data. Excessive confirmations train users to dismiss warnings automatically.
-
-## Feedback Channels
-
-Use channels according to importance.
-
-### Inline feedback
-Best for information directly tied to a control or field.
-
-### Toast
-Best for brief confirmation that does not require immediate action.
-
-### Banner
-Best for persistent page-level or system-level state.
-
-### Modal
-Reserve for decisions requiring immediate interruption.
-
-Do not place critical errors only in temporary toasts.
-
-## Optimistic UI
-
-Use optimistic updates only when:
-
-- the action is likely to succeed
-- rollback is safe
-- temporary inconsistency is acceptable
-- failure can be explained and recovered from
-
-Do not optimistically represent irreversible or high-risk operations as complete before the server confirms them.
+Favor undo for low-risk reversible changes. Confirm meaningful irreversible actions with clear affected-object and consequence text. Avoid habitual confirmations. Optimistic UI is suitable only when rollback is safe, inconsistency acceptable, and failure recoverable; do not represent high-risk irreversible actions as done before confirmation.
 
 ## Motion
 
-Motion should communicate continuity, hierarchy, causality, spatial relationships, or state change.
+Motion should explain continuity, spatial relationship, causality, or state change, not manufacture polish. Prefer responsive, interruptible transitions. Test repeated quick input, mid-transition retargeting, Escape/back reversals, and focus behavior. Respect reduced-motion preferences and do not delay controls until animation finishes. A prototype's motion fidelity is not a substitute for functional feedback.
 
-Avoid motion added solely to make an interface feel premium.
+## Feedback Channels
 
-Transitions should generally be fast, interruptible, consistent, proportional to movement, and respectful of reduced-motion preferences.
-
-Do not delay interaction to wait for animation to finish.
+Use inline messages for local issues; toasts for nonessential short confirmations; banners for persistent page/system issues; and modals only for decisions requiring interruption. Never put critical failures exclusively in transient toasts.

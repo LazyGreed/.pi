@@ -1,112 +1,48 @@
 # Dashboards and Data Interfaces
 
-## Dashboards and Admin Interfaces
-
-Optimize operational interfaces for comprehension and repeated use.
-
-- Surface system status clearly.
-- Make anomalies easier to find than normal states.
-- Preserve filters and view context where useful.
-- Support bulk actions for repetitive workflows.
-- Keep destructive actions distinct.
-- Use tables when users need comparison across records.
-- Expose important metadata without repeated drill-down.
-- Make asynchronous operations visible.
-- Avoid decorative dashboard cards containing one number with no actionable context.
-
-A dashboard should help users answer questions or act, not merely display metrics.
+Operational products are tools for answering questions and acting, not galleries of cards with numbers.
 
 ## Operational Density
 
-Frequent professional workflows may legitimately be dense.
+- Show status and anomalies where they can be found quickly.
+- Favor readable compact rows, stable alignment, bulk operations, keyboard efficiency, persistent state, and clear timestamps for repeated tasks.
+- Expose frequently used row actions; move rare actions to accessible overflow; separate destructive actions.
+- Avoid converting useful tables into cards merely to appear modern.
 
-Favor:
+## Tables and Quantities
 
-- compact but readable controls
-- stable alignment
-- high scan efficiency
-- keyboard shortcuts where appropriate
-- batch operations
-- persistent filtering/sorting state
-- useful defaults
+- Use semantic tables for cross-record comparison; keep headers and sort direction clear.
+- Right-align comparable numeric columns where suitable; use `font-variant-numeric: tabular-nums` for stable digit widths and align units/decimals consistently.
+- Preserve row identity across async updates; maintain position and selections.
+- Avoid hiding critical identifiers without a way to inspect/copy; handle narrow layouts deliberately.
+- Show counts/metrics with relevant period, denominator, units, freshness, baseline, and uncertainty. Avoid decorative percentages.
 
-Do not force spacious marketing aesthetics onto operational tooling.
+## Search and Sorting
 
-## Data Tables
+- Match search hints to supported query types. Keep the search accessible via a persistent label/name.
+- Make the active sort key/direction visible, with stable sorting where possible. Do not silently reorder lists on incidental updates.
+- Show active filters, allow clearing each/all, preserve them across detail navigation, and expose shareable URLs for complex searches where useful.
+- Separate sorting (ordering) from filtering (eligibility). Expose frequently used controls rather than putting everything behind an unlabeled generic menu.
 
-Use tables when users need to compare multiple properties across records.
+## Decision-Aware Filtering
 
-- Align numeric values appropriately.
-- Keep column meaning clear.
-- Support sorting/filtering where the task needs them.
-- Preserve headers during long vertical scans when useful.
-- Keep row actions predictable.
-- Avoid showing every possible action permanently in every row if it creates noise.
-- Provide bulk selection only when bulk actions exist.
-- Make empty, loading, and error states explicit.
-- Avoid truncating critical identifiers without a way to inspect/copy them.
-- Preserve row identity during async updates.
+Users' preferences may be negotiable. A buyer seeking three bedrooms may accept two for the right price; a small budget change may unlock significant inventory. Present these trade-offs without treating every parameter as an isolated yes/no query.
 
-Do not replace a useful table with cards merely to look modern.
+- Co-locate interdependent facets and maintain underlying results context. A cohesive sheet or page is often better than several nested subpages.
+- Choose control semantics deliberately: `3` exact, `3+` minimum, and `2–4` bounded range are different. Do not make an inclusive preference accidentally exclusive.
+- Prefer directly selectable labeled values for a short known set; steppers are reasonable for small repeated increments, not universally ideal for known target numbers.
+- Pair exploratory sliders with precise inputs when exact constraints matter. Always include keyboard access and accessible value text.
+- When results are dependable, show total and matching counts; `Show 41 homes` can communicate consequence before Apply. Offer recovery from zero matches.
+- Show per-option counts only if computed *conditionally on the other active filters*. Document whether current facet selections are excluded from their own count calculation.
+- Treat counts as potentially asynchronous or stale. Label approximation/freshness; debounce expensive queries; avoid layout thrash and false precision. Prefer explicit Apply when real-time computation is unreliable.
+- Use distributions/histograms when they expose a useful threshold or cluster, not merely to fill space. Label axes, units, binning assumptions, extreme values, and selection range; provide an accessible textual equivalent.
+- Translate price into decisions users actually make (cash required, monthly payment, ongoing costs) only with explicit inputs, assumptions, uncertainty, and excluded fees. A mortgage affordability estimate is not guaranteed approval.
+- Limit extra context to signals that inform the user's next adjustment, not every theoretically available metric.
 
-## Row Actions
+## Browsing Large Result Sets
 
-Choose between inline actions, overflow menus, and detail views based on frequency.
+Pagination fits stable position and deliberate comparison. Infinite scrolling can fit casual discovery, but restore the user's previous position and selected state when returning. Use a card/list toggle only when visual browsing and rapid structured comparison are both recurring needs.
 
-- Frequent primary row action → visible.
-- Infrequent secondary actions → overflow may be appropriate.
-- Dangerous actions → separated and clearly labeled.
+## System States
 
-Avoid hover-only actions when touch or keyboard use matters.
-
-## Sorting
-
-- Indicate the active sort and direction.
-- Use stable sorting where possible.
-- Do not silently change sort order after background updates unless the product depends on live ordering.
-- Preserve sort state when returning from detail views where useful.
-
-## Search and Filtering
-
-Search and filters should reduce a dataset predictably.
-
-- Make active filters visible.
-- Make filters easy to clear.
-- Preserve filter state when navigating into and back from details where useful.
-- Show result counts when useful.
-- Debounce or explicitly submit based on expected interaction cost.
-- Do not reset unrelated filters unexpectedly.
-- Clearly distinguish `no data exists` from `no data matches these filters`.
-- For complex products, consider shareable URLs representing filter/search state.
-
-## Pagination and Infinite Loading
-
-Choose based on the task.
-
-Pagination is often better when users need:
-
-- stable position
-- predictable result boundaries
-- direct navigation
-- comparison across known pages
-
-Infinite loading may work when users primarily browse continuously and exact location is less important.
-
-Do not use infinite scrolling where users must reliably return to an exact item unless position restoration is robust.
-
-## Status
-
-Status should be easy to scan and semantically consistent.
-
-- Prefer clear labels over unexplained color dots.
-- Distinguish current state from historical events.
-- Use timestamps when freshness matters.
-- Avoid status taxonomies with unnecessary near-duplicates.
-
-## Metrics
-
-Every surfaced metric should answer a plausible product question.
-
-For important metrics, provide relevant context such as period, comparison baseline, units, or denominator.
-
-Avoid decorative percentage deltas without enough context to interpret them.
+Distinguish no records exist from no records match current filters; loading from empty; unavailable values from zeros; and stale from live counts. Make partial failure actionable without blocking unrelated records.

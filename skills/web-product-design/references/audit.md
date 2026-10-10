@@ -1,140 +1,62 @@
 # Audit and Review Workflow
 
-Evaluate interfaces in descending order of user impact. Structural and interaction problems come before visual polish.
+Audit the **end-to-end decision journey** in descending order of impact, not in order of visual novelty.
 
 ## Audit Sequence
 
-### 1. User Task
+1. **Task:** What is the primary job, success state, and worst credible failure? Can users complete it?
+2. **Information architecture:** Is necessary information visible at the point of decision? Are coupled constraints and comparison attributes near each other?
+3. **Decision support:** Can users see real alternatives, likely consequences, inventory, costs, and how changing a constraint affects options?
+4. **Hierarchy:** Does the first screen emphasize the right information, with coherent grouping and typography rather than competing cards/chips/badges?
+5. **Interaction:** Are controls understandable and feedback immediate? Can people revise, undo, cancel, or recover?
+6. **States:** Check loading, partial, empty, zero-match, stale, offline, error, disabled, permission-limited, and success as applicable.
+7. **Accessibility:** Check semantics, keyboard, focus, contrast, zoom, touch, and reduced motion.
+8. **Responsive:** Check narrow touch, desktop keyboard, long content, system gestures, sticky bars, mobile keyboards, and localized text.
+9. **Consistency/performance:** Reuse tokens and components; check slow loads, layout shifts, unstable sorting, overly expensive real-time signals.
+10. **Trust/conversion:** Are prices, fees, subscriptions, personalizations, rankings, availability, and claims truthful and comprehensible?
 
-- What is the primary task?
-- Is it obvious?
-- Can it be completed?
-- What is the success state?
+## Decision-support Questions
 
-### 2. Information Architecture
+- Is the task exploration, comparison, action, or a combination? Does the layout reflect it?
+- Does every new control/chart/badge help a concrete decision more than it increases noise?
+- Can users tell exact versus minimum versus ranged filters apart?
+- Are displayed counts, rankings, median values, prices, and estimates current, conditional on active filters, and labeled appropriately?
+- Can users preview a consequence reliably without misleading precision? What happens when results are empty?
+- Are labels/controls closer to their associated content than unrelated content? Are prices/numbers aligned for comparison?
+- Is text legible over all plausible photos? What if images are missing, too bright, or low-resolution?
+- Does a popular/default option have evidence and avoid coercion? Does a mobile sticky CTA cover focus, errors, or safe areas?
+- Is prototype motion actually interruptible and accessible? Can users use a nested carousel on keyboard and touch?
+- Does a visually premium redesign make task completion or comprehension worse?
 
-- Is required information available before decisions?
-- Are related concepts grouped?
-- Is navigation understandable?
-- Does the user need to remember information that should remain visible?
+## Findings Format
 
-### 3. Hierarchy
+For each nontrivial issue report:
 
-- Is the most important information visually dominant?
-- Are primary and secondary actions clear?
-- Is decoration competing with content?
+### `[Blocker|Major|Minor|Polish] Concise title`
 
-### 4. Interaction
+**Area:** interaction / IA / accessibility / content / performance / trust / etc.
 
-- Are controls understandable?
-- Is feedback immediate?
-- Are async states handled?
-- Can users recover from mistakes?
+**Observed problem:** What demonstrably happens, with reproduction conditions.
 
-### 5. State Coverage
+**Impact:** How it affects comprehension, accuracy, autonomy, accessibility, efficiency, or completion.
 
-Check loading, empty, success, error, disabled, permission-limited, partial, and destructive states.
+**Smallest viable correction:** Prefer removal, reorder, existing component, copy change, or clearer feedback before adding UI.
 
-### 6. Accessibility
-
-Check keyboard, focus, semantics, contrast, target size, zoom/reflow, accessible naming, and reduced motion.
-
-### 7. Responsive Behavior
-
-Check narrow screens, wide screens, touch, pointer, long content, mobile keyboard, and sticky UI.
-
-### 8. Consistency
-
-Check components, typography, spacing, action hierarchy, states, and naming.
-
-### 9. Performance
-
-Check delayed feedback, content shifting, oversized media, unnecessary JavaScript, and excessive animation.
-
-### 10. Trust
-
-Check costs, consequences, privacy, permissions, irreversible changes, and recurring commitments.
-
-### 11. Conversion
-
-Only after the above:
-
-- Is the intended action easy to find?
-- Is unnecessary friction present?
-- Can the decision be made confidently?
-- Can conversion improve without reducing user agency?
-
-## General Audit Rubric
-
-- [ ] **Task Clarity:** The primary purpose and next action are understandable.
-- [ ] **Information Architecture:** Information appears in the order needed for decisions.
-- [ ] **Visual Hierarchy:** Importance is communicated clearly without excessive decoration.
-- [ ] **Interaction Feedback:** Actions visibly acknowledge input and communicate results.
-- [ ] **State Coverage:** Loading, empty, success, failure, disabled, and partial states are handled.
-- [ ] **Accessibility:** Keyboard, focus, semantics, contrast, zoom, and target sizing are considered.
-- [ ] **Responsive Design:** The interface adapts rather than merely shrinking.
-- [ ] **Consistency:** Existing patterns and system components are reused.
-- [ ] **Content Clarity:** Labels, instructions, and errors communicate precisely.
-- [ ] **Performance:** The interface remains responsive and visually stable.
-- [ ] **User Control:** Users can cancel, undo, navigate, or recover where appropriate.
-- [ ] **Trust:** Costs, permissions, consequences, and commitments are transparent.
-- [ ] **Conversion:** Desired actions are low-friction without manipulation.
-
-## Reporting Findings
-
-Report findings in descending order of user impact.
-
-Use this shape:
-
-### `[severity] Finding title`
-
-**Area:** interaction / accessibility / hierarchy / responsive / content / etc.
-
-**Problem:**  
-Describe the observable issue.
-
-**Impact:**  
-Explain how it affects task completion, comprehension, accessibility, trust, efficiency, or conversion.
-
-**Recommendation:**  
-Give the smallest concrete change likely to resolve the issue.
-
-**Evidence:**  
-Identify whether the finding comes from direct observation, product data, user research, accessibility/usability guidance, established interaction convention, or design hypothesis.
+**Evidence:** Direct observation, usability test, analytics, research, accessibility guidance, convention, or explicitly labeled design hypothesis.
 
 ## Severity
 
-### Blocker
+- **Blocker:** Prevents completion, serious accessibility failure, material harm, or effective unusability.
+- **Major:** Significant repeated friction, confusion, error, or task failure.
+- **Minor:** Noticeable but recoverable usability/consistency problem.
+- **Polish:** Primarily visual, with little task impact.
 
-Prevents completion, causes serious accessibility failure, creates substantial risk, or makes the feature effectively unusable.
+Do not elevate subjective visual preferences into blockers.
 
-### Major
+## Evaluation
 
-Creates significant friction, confusion, repeated errors, or degraded task completion.
+Prefer observed task success, time to useful action, corrections, reversals, wrong submissions, comprehension, and confidence over screenshot preference. Compare alternatives with the same realistic data and constraints. Record test limits honestly. Do not infer a designer's quality from claimed seniority level or count of advanced widgets.
 
-### Minor
+## Minimal Change Discipline
 
-Creates noticeable but recoverable usability or consistency problems.
-
-### Polish
-
-Primarily visual refinement with limited effect on task completion.
-
-Do not elevate visual preferences into usability blockers.
-
-## Recommendation Discipline
-
-Prefer the smallest change that solves the actual problem.
-
-Before recommending new UI, ask:
-
-1. Can something unnecessary be removed?
-2. Can existing information be reordered?
-3. Can an existing component solve it?
-4. Can wording solve it?
-5. Can system feedback solve it?
-6. Only then: is new UI required?
-
-Do not recommend additional UI unless it removes greater complexity elsewhere.
-
-When an existing interface already works well, preserve it. Good product design frequently means changing less.
+Before recommending new UI: can the extra element be removed, existing content reordered, a design-system primitive reused, wording clarified, or feedback improved? Add a new component only when simpler changes cannot solve the issue. Preserve interfaces that already work.

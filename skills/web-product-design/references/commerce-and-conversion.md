@@ -1,185 +1,59 @@
 # Commerce and Conversion
 
-Conversion design should reduce friction around an action users already understand and intend to evaluate.
+Conversion design reduces uncertainty, unnecessary effort, and friction around an action users understand and wish to evaluate. It must preserve truth, informed choice, accessibility, and autonomy.
 
-Optimize relevance, trust, clarity, effort, uncertainty, and action visibility. Do not optimize conversion through deception or obstruction.
+## Trust and Evidence
 
-## Trust and Transparency
+Disclose total price, fees, billing terms, trial expiration, cancellation, permissions, returns, irreversible consequences, and important limitations. Never manufacture scarcity, hide mandatory charges, fake progress, disguise advertising as neutral recommendation, fabricate reviews or badges, or make rejection deliberately harder.
 
-Clearly expose:
+Place authentic reassurance close to a consequential CTA when it answers real objections: verified reviews with an actual count, documented refund terms, genuine availability, cancellation conditions, or accepted payment methods. Avoid empty padlock badges or unverified security assurances.
 
-- total price
-- recurring billing
-- trial expiration
-- cancellation implications
-- permissions
-- data deletion
-- irreversible operations
-- material limitations
-- important defaults
+Treat dramatic redesign conversion uplifts as case-specific outcomes, not guaranteed multipliers. Judge experiments by observed quality, user choice, refunds, and downstream trust, not clicks alone.
 
-Do not:
+## Discovery and Product Listings
 
-- hide mandatory charges
-- manufacture scarcity
-- fabricate urgency
-- create fake progress
-- disguise advertisements as product content
-- make cancellation harder than signup without justification
-- make rejection intentionally difficult
-- use guilt or fear to force acceptance
+The listing surface should serve exploration or comparison as needed.
 
-Business goals do not override informed user choice.
+- For appearance-led discovery, show useful, well-sized actual product/dish photos rather than tiny icons or brand marks alone. Avoid cramming an arbitrary record count above the fold.
+- For known-item comparison, foreground name, price, delivery time, distance, inventory, ratings, and other domain-relevant attributes with stable alignment.
+- Give titles a clearer hierarchy than low-value metadata. Keep categories visually subordinate to listings when the listings are the main event.
+- Expose common sorting/filter choices and a clear route to advanced options. A mix of quick chips and a detailed filter surface is one possible pattern.
+- Do not place essential item names, prices, or ratings on unpredictable seller photos without robust legibility. A separate text region often de-risks the layout.
+- A relevance label such as `Best Match` needs real product signals. Clearly identify advertising and distinguish personalized rankings from objective measurements.
+- Show total result count or available inventory when accurate, relevant, and appropriately fresh. Provide honest states for incomplete data.
+- Offer card/list views only if research indicates distinct discovery and fast-comparison jobs; retain selection, filter, and scroll position when switching.
 
-## Behavioral Design
+## Above-the-Fold Value
 
-Behavioral principles are heuristics, not universal laws. Use them only when they improve legitimate task completion.
+On a landing or product page, quickly answer what the offer is, who it helps, the actual value, important qualifiers, and the next useful action. Product-in-use media can support explanation, but task-oriented software should not be forced into oversized lifestyle visuals. Strong visuals do not replace functional clarity.
 
-### Smart Defaults
+## Product Detail and Booking
 
-**Goal:** reduce repetitive decision-making.
+Answer: What is it? Does it fit? What does it cost? Can I trust it? Which version? When/how do I receive it? What if it goes wrong? How do I buy/reserve?
 
-Use when one option is strongly probable, low-risk, clearly visible, and easy to change.
+- Keep name, selected variant, current price, availability, and key trust/delivery info near the relevant action.
+- For a manageable set of variants, visible labeled cards, chips, or swatches can improve recognition. Provide names for color-only choices and show unavailable options. For numerous options, a select/search flow may be better.
+- Variant changes must update dependent price, stock, delivery estimate, and action state without losing user selections.
+- `From $150` is valid only when a real qualifying configuration starts there and material fees/conditions are clear. Prefer exact, updated totals for chosen options; do not use wide ranges as a substitute for real configuration prices.
+- When reserving, show the exact date/time, party size, key restrictions, and cancellation terms before confirming. Keep scarce or unavailable alternatives truthful.
+- A sticky mobile price/CTA may help after long exploration, but must not hide the current selection, payment consequence, errors, focus, system gestures, or page content.
 
-Avoid when financial commitment, consent, privacy, irreversible decisions, or destructive operations are involved.
+## Pricing and Subscription Selection
 
-Validate with correction rate, completion rate, abandonment, and user feedback.
+Make billing period/frequency, usage limits, overages, trial conditions, upgrade effects, included features, and exclusions comparable. Highlight `Most Popular` only using measured adoption, and `Best Value` only against defined criteria. Do not preselect the most expensive, financially binding, or recurring plan to create an anchor. Recommendations should be explainable and easy to change; meaningful consent remains deliberate.
 
-### Choice Reduction
+## Onboarding and Defaults
 
-**Goal:** reduce unnecessary cognitive load.
-
-Useful patterns include sensible grouping, progressive disclosure, recommended configurations, search/filter, good defaults, and comparison tools.
-
-Do not remove meaningful options merely to force users toward one outcome.
-
-### Progress
-
-Progress indicators must reflect real progress. Do not invent completed steps solely to create artificial momentum.
-
-If prior work genuinely contributes to completion, it may be represented.
-
-### Upfront Value
-
-Where appropriate, let users experience meaningful value before unnecessary account creation or payment.
-
-Examples:
-
-- preview results
-- configure before signup
-- test an editor
-- calculate an estimate
-- inspect a generated report
-
-Do not let users perform substantial work and then unexpectedly trap the result behind an undisclosed registration or payment wall.
-
-### User Investment
-
-If users perform meaningful work before signup, preserve it and clearly explain whether signup is required. Do not threaten unnecessary loss to manufacture sunk-cost pressure.
-
-### Loss Communication
-
-Explain genuine consequences such as unsaved changes, expiring data, deleted resources, or access lost after downgrade. Describe the consequence factually; do not exaggerate or invent loss.
-
-### Price Context
-
-You may show total price, billing cadence, per-unit cost, price difference, savings, or relevant comparisons. Always keep absolute costs visible. Do not use percentages primarily to make meaningful costs appear insignificant.
-
-## Onboarding
-
-Onboarding should help users reach first meaningful value quickly.
-
-- Ask only for information required now.
-- Defer configuration that can safely happen later.
-- Explain why unusual information is required.
-- Provide useful defaults.
-- Allow skipping nonessential personalization.
-- Preserve user progress.
-- Keep progress indicators truthful.
-- Prefer doing over explaining when the product can teach through interaction.
-- Avoid long tours before users can use the product.
-
-Measure time-to-value, not number of onboarding screens completed.
-
-## Pricing
-
-Pricing interfaces should help users understand differences without spreadsheet-level analysis.
-
-Clearly show:
-
-- price
-- billing period
-- billing frequency
-- included limits
-- usage-based components
-- material exclusions
-- upgrade implications
-
-Use comparison tables when plans genuinely require comparison. Do not hide important limitations in tooltips or footnotes.
-
-A recommended plan may be highlighted when there is a legitimate product reason, but other plans must remain understandable and selectable.
-
-## E-Commerce Product Pages
-
-Product pages should answer, roughly:
-
-1. What is this?
-2. Is it relevant to me?
-3. What does it cost?
-4. Can I trust it?
-5. Which option should I choose?
-6. When/how will I receive it?
-7. What happens if it is wrong for me?
-8. How do I buy it?
-
-### Product Identity
-
-Keep visually close:
-
-- product name
-- meaningful variant
-- price
-- rating/review count where available
-- key purchase state
-
-Avoid stuffing every attribute into the product title.
-
-### Media
-
-Product media should show the actual item clearly, maintain consistent framing where appropriate, support inspection, and keep overlaid controls legible against variable imagery.
-
-### Variant Selection
-
-Variant controls should expose meaningful names, show unavailable options, communicate price differences, update dependent information immediately, and preserve user selection where possible.
-
-### Quantity and Presets
-
-Use presets only when actual product behavior or analytics indicates common quantities. Keep custom selection available where needed. Do not invent `popular` options without evidence.
-
-### Purchase Action
-
-The purchase area should communicate selected product/variant, quantity, current price, availability, and primary action.
-
-Dynamic totals may be included in the CTA where this improves clarity, for example `Add to cart · $48`.
-
-### Sticky Purchase Controls
-
-Sticky controls may help when purchase intent can arise after extended exploration. Use them only when they do not obscure important content, current selection remains understandable, and mobile viewport consumption remains reasonable.
+Provide meaningful value early, ask only for information required now, defer safe configuration, preserve progress, and allow skipping nonessential personalization. Use low-risk, evidence-supported, reversible defaults; never silently select payment, consent, or privacy commitments. Measure time-to-value rather than manufactured step completion.
 
 ## Cart and Checkout
 
-Checkout should minimize uncertainty and unnecessary input.
+- Show final costs and mandatory fees before commitment; keep order, shipping, tax, and recurring obligations understandable.
+- Support guest checkout when viable, autofill, preservation of valid input, field-local errors, and explicit payment semantics.
+- A final `Pay $84.20` action is clearer than vague `Continue` if a charge will occur.
+- Explain refund, cancellation, shipping, and return policies in terms users can verify, not generic trust badges.
+- Never hide extra fees, surprise-register users after extensive work without disclosure, or penalize declining a purchase.
 
-- Keep total cost visible.
-- Reveal mandatory fees before final commitment.
-- Preserve cart state.
-- Support browser autofill where appropriate.
-- Avoid forcing account creation when guest checkout is viable.
-- Make shipping and delivery expectations clear.
-- Keep validation close to inputs.
-- Preserve completed fields after errors.
-- Distinguish billing and shipping clearly.
-- Explain why unusual information is required.
-- Make the final commitment action explicit.
+## Measure Carefully
 
-Prefer `Pay $84.20` over `Continue` when clicking the button creates a charge.
+Track task success, decision comprehension, qualified conversion, correction and reversal rates, support/returns, trust outcomes, and experiment guardrails. Evaluate by segment and device. Do not claim causality from a before/after screenshot alone.
