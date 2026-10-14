@@ -5,7 +5,7 @@ Read when using concurrent writers, cross-repository teams, or continuing work a
 ## Authority and topology
 
 - The current Pi session is the coordinator and sole authoritative integration reporter. Team names group tasks by outcome, not persistent autonomous agents.
-- One task, one accountable owner. One integration owner per repository. Independent reviewers do not modify the implementation under review.
+- One task, one accountable writer. Keep the worker's role separate from its unique `owner_id`, and record its execution cwd or session ID. One integration owner per repository. Independent reviewers do not modify the implementation under review.
 - Worker profiles are reusable roles, not permanent employees. Start them only for bounded tasks. Never recurse into unsupervised subagents.
 - Profile text and a missing `edit` tool are not OS-level read-only enforcement. Agents with shell access and test commands can still mutate files. Keep review/QA out of concurrent writer checkouts; use read-only filesystem permissions if strict isolation is required.
 - The repository issue/PR system or approved task ledger is the authority for durable state; a conversation ledger is ephemeral.
@@ -28,14 +28,14 @@ Do not set `done` from a child's success message. Detect stale active work on re
 
 - Dispatch only tasks whose prerequisite artifacts have been validated, not merely reported complete.
 - Shared migrations, schema changes, public interfaces, generated code, CI workflows, and the same path are collision domains. Assign one writer or sequence using explicit integration boundaries.
-- At task start, record baseline commit and reserved paths/interfaces. At handoff, include changed paths and any unexpected overlap. If overlap appears, stop both writers and reassign boundaries or sequence the changes.
+- At task start, record baseline commit, role, unique `owner_id`, execution cwd/session, and reserved paths/interfaces. At handoff, include changed paths and any unexpected overlap. If overlap appears, stop both writers and reassign boundaries or sequence the changes.
 - A Git branch alone does not isolate files; a **separate checkout/worktree and verified process cwd** does. Do not run two edit-capable subagents in the same checkout concurrently.
 - Prefer one PR per independently testable change; group only genuinely inseparable changes. Integration owner rebases/merges branches and handles conflicts only with permission.
 - No shared `git reset --hard`, `git clean -fdx`, force pushes, worktree removal, or stash operations without explicit authority and verification of user data.
 
 ## Handoffs
 
-A handoff must include: task ID, desired behavior, actual changed files, branch and baseline SHAs, relevant commands/tests and results, E2E status, security/performance considerations, unresolved findings, and exact next owner/action. Never use vague completion claims or require the integrator to reconstruct all context from a long transcript.
+A handoff must include: task ID, role, `owner_id`, execution cwd/session, desired behavior, actual changed files, branch and baseline SHAs, relevant commands/tests and results, E2E status, security/performance considerations, unresolved findings, and exact next owner/action. Never use vague completion claims or require the integrator to reconstruct all context from a long transcript.
 
 ## Review
 

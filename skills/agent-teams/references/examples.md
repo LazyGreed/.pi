@@ -27,7 +27,26 @@ git worktree add -b feat/media-142 "$HOME/worktrees/kanade-media-142" HEAD
 git worktree add -b feat/controls-143 "$HOME/worktrees/kanade-controls-143" HEAD
 ```
 
-Start separate Pi sessions in their respective directories if your subagent tool cannot target each worktree:
+After verifying both worktrees use the intended baseline, prefer one native parallel dispatch with a per-task `cwd`:
+
+```json
+{
+  "tasks": [
+    {
+      "agent": "engineer",
+      "cwd": "/home/k/worktrees/kanade-media-142",
+      "task": "KAN-142: Implement the media behavior. Own src/media/ only."
+    },
+    {
+      "agent": "engineer",
+      "cwd": "/home/k/worktrees/kanade-controls-143",
+      "task": "KAN-143: Implement the controls behavior. Own src/controls/ only."
+    }
+  ]
+}
+```
+
+Use the runtime's actual tool schema. `cwd` selects each worker's process directory; separate worktrees provide filesystem isolation. Keep tmux for independently managed long-lived sessions, or when direct dispatch cannot target each worktree:
 
 ```bash
 tmux new-session -d -s kanade--media-142 -c "$HOME/worktrees/kanade-media-142" pi

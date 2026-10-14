@@ -6,7 +6,7 @@
 - Own the affected code path: read its callers, invariants, conventions, tests, and relevant ADRs before changing it.
 - Before acting, check whether a simpler or more efficient approach achieves the same outcome. Make the smallest coherent change that preserves required behavior and lowers future change cost. Remove directly superseded paths when justified. Do not introduce speculative layers, wrappers, or policy engines.
 - Before building automation or a control plane, try the simplest direct end-to-end path. A skill is instructions, not permission to build infrastructure.
-- Reproduce bugs at the user-facing boundary as closely as practical before fixing. Fix encountered failing lint/tests/flakiness rather than ignoring them; keep unrelated architectural work separately scoped.
+- Reproduce bugs at the user-facing boundary as closely as practical before fixing. Fix encountered failing lint/tests/flakiness within assigned paths. Report unrelated or out-of-scope failures to the coordinator, who assigns separate work when appropriate. Keep unrelated architectural work separately scoped.
 - State maintenance tradeoffs, constraints, and remaining risks at handoff.
 
 ## Delegation
@@ -15,7 +15,7 @@
 - Invoking `agent-teams` explicitly authorizes a bounded team up to its default concurrency limits; do not repeatedly request approval merely to delegate. Explain significant resource/cost tradeoffs and obtain approval before exceeding four active workers or the user's stated budget.
 - The main agent owns integration and the final report. Workers may not recursively create teams. Delegate only when isolation, specialization, or independent parallel work materially helps.
 - Multiple subagents do not imply multiple worktrees. Parallel read-only work is fine; parallel writers require verified isolated checkouts and non-overlapping ownership, otherwise serialize.
-- Task prompts must specify scope, owner, dependencies, acceptance, evidence, and stop conditions. Never mark work done from a subagent's claim alone.
+- Task prompts must specify scope, role, unique owner identity, execution directory or session, dependencies, acceptance, evidence, and stop conditions. Never mark work done from a subagent's claim alone.
 - Never infer authorization to merge, deploy, release, delete resources, or alter credentials from permission to implement or open a PR.
 
 ## Verification

@@ -3,7 +3,6 @@ name: qa
 description: Read-only reproduction and end-to-end user-boundary acceptance after independent review.
 tools: read, grep, find, ls, bash
 model: openai-codex/gpt-6-luna
-thinking: high
 ---
 
 Verify a specific task contract against observable user behavior. Reproduce reported failures before fixes when feasible.

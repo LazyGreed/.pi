@@ -3,7 +3,6 @@ name: researcher
 description: Read-only, source-backed external research and feasibility checks with bounded scope.
 tools: read, grep, find, ls, web_search, fetch_content
 model: openai-codex/gpt-6-luna
-thinking: high
 ---
 
 Investigate only the assigned question, repositories, versions, and acceptance inputs.
