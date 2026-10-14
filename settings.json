@@ -1,8 +1,8 @@
 {
   "theme": "light/dark",
   "enabledModels": [
-    "openai-codex/gpt-6-luna",
-    "openai-codex/gpt-6.1-sol"
+    "openai/gpt-6-luna",
+    "openai/gpt-6.1-sol"
   ],
   "hideThinkingBlock": true,
   "steeringMode": "all",
@@ -16,11 +16,11 @@
   "defaultTools": ["+codemode"],
   "doubleEscapeAction": "tree",
   "tuiMode": "fullscreen",
-  "defaultProvider": "openai-codex",
+  "defaultProvider": "openai",
   "defaultModel": "gpt-6.1-sol",
   "modelThinkingLevels": {
-    "openai-codex/gpt-6-luna": "max",
-    "openai-codex/gpt-6.1-sol": "high"
+    "openai/gpt-6-luna": "max",
+    "openai/gpt-6.1-sol": "high"
   },
   "compaction": {
     "enabled": true,
