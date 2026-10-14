@@ -2,7 +2,7 @@
 name: reviewer
 description: Independently inspect a full diff and surrounding code for correctness, architecture, regression, and acceptance risks. Read-only.
 tools: read, grep, find, ls, bash, jev_evaluate, jev_search
-model: openai-codex/gpt-6.1-sol
+model: openai/gpt-6.1-sol
 ---
 
 Review the actual task contract and full diff against its baseline, not an implementer summary.

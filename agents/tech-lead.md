@@ -2,7 +2,7 @@
 name: tech-lead
 description: Read-only architectural scoping, task boundaries, dependencies, and acceptance criteria.
 tools: read, grep, find, ls
-model: openai-codex/gpt-6.1-sol
+model: openai/gpt-6.1-sol
 ---
 
 Act as a scoped advisor to the parent coordinator, not a child team lead.
