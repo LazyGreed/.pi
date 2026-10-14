@@ -1,93 +1,38 @@
-# Instructions
+# Agent instructions
 
-- Never use the em dash "—", use plain dash "-" instead
-- Be extremely concise, sacrifice grammar for the sake of concision
-- Never add 'Generated with Claude Code', Co-Authored-By, or any agent 
-  attribution to commits, PR descriptions or comments
-- When making technical decisions, do not give much weight to development cost.
-  Instead, prefer quality, simplicity, robustness, scalability, and long term 
-  maintainability.
-- Own the affected codebase, not just the ticket. Trace relevant callers,
-  invariant owners, conventions, and ADRs before editing.
-- Prefer the smallest coherent change that preserves behavior and lowers future
-  change cost. Remove directly related duplication or obsolete paths when justified.
-  Record unrelated architectural debt separately; avoid speculative refactors,
-  unnecessary abstractions, and scope creep.
-- At handoff, report meaningful maintenance tradeoffs and remaining risks.
-- For one-off or infrequent operational work, start with the simplest direct 
-  end-to-end path. Do not build wrappers, control planes, policy layers, 
-  custom verifiers, or automation unless the direct path exposes a concrete 
-  blocker or repeated need that justifies the added machinery.
-- When doing bug fixes, always start with reproducing the bug in an E2E 
-  setting as closely aligned with how an end user would experience it as 
-  possible. This makes sure you find the real problem so your fix will 
-  actually solve it.
-- Apply that same high standard to engineering excellence: lint, test 
-  failures, and test flakiness. If you see one, even if it is not caused 
-  by what you are working on right now, still get it fixed.
-- Before immediately spawning a large swarm of subagents, always explain 
-  the tradeoffs and ask the user for explicit approval.
+- Never use an em dash. Be extremely concise; favor concrete facts over explanation.
+- Do not add agent attribution, `Generated with Claude Code`, or `Co-Authored-By` to commits, PRs, or comments.
+- Prefer correctness, simplicity, robustness, and long-term maintainability to optimizing initial development time.
+- Own the affected code path: read its callers, invariants, conventions, tests, and relevant ADRs before changing it.
+- Before acting, check whether a simpler or more efficient approach achieves the same outcome. Make the smallest coherent change that preserves required behavior and lowers future change cost. Remove directly superseded paths when justified. Do not introduce speculative layers, wrappers, or policy engines.
+- Before building automation or a control plane, try the simplest direct end-to-end path. A skill is instructions, not permission to build infrastructure.
+- Reproduce bugs at the user-facing boundary as closely as practical before fixing. Fix encountered failing lint/tests/flakiness rather than ignoring them; keep unrelated architectural work separately scoped.
+- State maintenance tradeoffs, constraints, and remaining risks at handoff.
 
-## Subagents
+## Delegation
 
-- Delegate only when isolation, specialization, or parallel work materially 
-  helps.
-- Prefer the smallest suitable role: tech-lead, engineer, reviewer, qa, 
-  researcher.
-- Keep the main agent responsible for orchestration and final synthesis.
-- Do not use subagents for trivial work the main agent can do directly.
-- Parallelize only independent tasks.
+- Default to direct work. For a single complex engineering request, use `go-for-it`. For explicit parallel teams, several independent tasks, or cross-repo coordination, use `agent-teams`.
+- Invoking `agent-teams` explicitly authorizes a bounded team up to its default concurrency limits; do not repeatedly request approval merely to delegate. Explain significant resource/cost tradeoffs and obtain approval before exceeding four active workers or the user's stated budget.
+- The main agent owns integration and the final report. Workers may not recursively create teams. Delegate only when isolation, specialization, or independent parallel work materially helps.
+- Multiple subagents do not imply multiple worktrees. Parallel read-only work is fine; parallel writers require verified isolated checkouts and non-overlapping ownership, otherwise serialize.
+- Task prompts must specify scope, owner, dependencies, acceptance, evidence, and stop conditions. Never mark work done from a subagent's claim alone.
+- Never infer authorization to merge, deploy, release, delete resources, or alter credentials from permission to implement or open a PR.
 
-## Testing and verification
+## Verification
 
-- Do not use TDD by default.
-- Do not generate tests merely because code changed.
-- Run existing relevant tests, lint, and static checks.
-- Add tests when they independently verify specified behavior, reproduce 
-  a confirmed defect, or protect a meaningful invariant.
-- Prefer observable behavior and production interfaces over 
-  implementation-specific assertions.
-- For regression tests, verify they fail against the broken implementation 
-  when practical.
-- Never weaken existing tests to make an implementation pass.
-- Keep independent review before final manual E2E verification.
-- For bug fixes, reproduce the original failure first.
+- Do not default to TDD or generate tests solely because code changed. Use existing relevant tests, lint, static checks, and observable behavior.
+- Add tests for confirmed defects and meaningful invariants; verify regression tests fail against the broken behavior where practical. Never weaken tests for a green build.
+- Have an independent reviewer inspect nontrivial code changes. Resolve valid findings, refresh review after edits, and do manual/user-facing E2E acceptance after review. If blocked, report the limit rather than inventing a pass.
+- Distinguish observed evidence, inference, and unchecked assumptions. Unavailable tooling is not a successful check.
 
 ## Jev
 
-- Use Jev for semantic judgment. This is mandatory, not optional.
-- Use `jev_search` when locating or ranking relevant code/docs requires 
-  semantic relevance, especially across unfamiliar or multiple files.
-- Use `jev_evaluate` when judging meaning, intent, quality, alignment, 
-  architecture, tradeoffs, ambiguity, categorization, or whether an 
-  implementation satisfies requirements.
-- Reviews, refactors, architecture work, spec/code alignment, and 
-  documentation/product-boundary checks MUST use Jev at least once when they 
-  involve semantic judgment.
-- Green CI, tests, `rg`, source inspection, or runtime checks do not replace 
-  Jev for semantic judgment. They establish deterministic facts; Jev evaluates 
-  meaning.
-- If two reasonable reviewers could disagree based on interpretation rather 
-  than an exact fact, use `jev_evaluate`.
-- If you do not know which sources matter without reading many candidates, 
-  use `jev_search` before broad reads.
-- Do not use Jev for exact lookups, syntax, mechanical verification, 
-  known-path reads, or facts deterministically answered by tools.
-- Read and verify selected source normally after Jev. Jev output is evidence, 
-  not authority.
-- Batch independent Jev questions when practical.
-- If Jev is required but unavailable or fails, say so explicitly and continue 
-  with the strongest deterministic evidence available. Never silently skip it.
-- Before finishing any non-trivial review or analysis, check: **Did this task 
-  require semantic judgment? If yes and no Jev call was made, use Jev before 
-  answering.**
+- Jev is mandatory for semantic judgment when available, including nontrivial reviews, refactors, architecture assessments, specification alignment, and product/documentation boundaries.
+- Use `jev_search` when choosing relevant sources requires semantic ranking across unfamiliar files. Use `jev_evaluate` for meaning, intent, quality, architecture, tradeoffs, and semantic acceptance.
+- Deterministic checks, exact search, source reading, and CI do not replace Jev semantic review; Jev does not replace them either.
+- Do not use Jev for mechanical lookups or known-path reads. Verify cited source normally after Jev. Batch independent questions when practical.
+- If Jev fails or is unavailable, disclose that fact and continue with strongest available independent and deterministic evidence; do not silently skip it.
 
-## Maintaining this file
+## Maintainability of these instructions
 
-- Keep this file for knowledge useful to almost every future agent session in 
-  this project.
-- Do not repeat what the codebase already shows; point to the authoritative 
-  file or command instead.
-- Prefer rewriting or pruning existing entries over appending new ones.
-- When updating this file, preserve this bar for all agents and keep entries 
-  concise.
+Keep global instructions short and broadly applicable. Put workflow detail in the relevant skill, not here. Prefer replacing obsolete rules to accumulating contradictory ones.
