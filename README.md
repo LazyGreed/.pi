@@ -1,49 +1,61 @@
-# Pi agent setup
+# Albert
 
-Personal Pi-first coding-agent configuration. Claude Code shares the same core instructions, skills, agent roles, and Jev semantic-review package.
+Harness-native engineering orchestrator for one repository at a time. Albert talks to the human, scopes tasks, delegates to four named subagents, and reports only supported outcomes. Albert never implements application code.
 
-## Contents
+## Agents
 
-- `AGENTS.md` - global behavior, safety, quality, and delegation rules
-- `skills/agent-teams/` - multi-task and multi-project coordination (logical teams, worktree discipline, handoffs, integration)
-- `skills/go-for-it/` - one-task implementation and verification
-- `skills/` - other on-demand engineering and design skills
-- `agents/` - five bounded subagent roles: `tech-lead`, `engineer`, `researcher`, `reviewer`, `qa`
-- `extensions/k-jev/` - semantic search and evaluation for Pi and Claude
-- `settings.json`, `models.json` - Pi configuration
-- `claude-settings.json` - Claude Code settings
+- **Albert**: coordinator, installed as primary instructions (`AGENTS.md` for Pi; `CLAUDE.md` for Claude Code).
+- **Nora**: investigator, architecture/research/scoping.
+- **Felix**: engineer, the code-writing worker.
+- **Vera**: independent consequential-change review.
+- **Iris**: observable E2E/smoke acceptance.
 
-## Use
+Native delegation only: `nathanstephenson/pi-subagents` for Pi; built-in agents for Claude Code. No custom orchestration service, tmux dependency, database, or task logs.
 
-Pi discovers skills from `~/.pi/agent/skills/` or configured skill paths. Install this repository at your chosen Pi agent configuration location, or symlink its `skills/` and `agents/` directories there. Reload Pi after changes.
+## Install
 
-In an interactive Pi session:
+Run from this repository (after applying the migration bundle). Launch the keyboard-driven TUI (arrows/`j`/`k`, Space/Enter, Esc) and review the planned writes before confirming:
 
-```text
-/skill:go-for-it Fix the reported bug and open a PR
-/skill:agent-teams Plan and execute these independent Kanade tasks with separate reviewers
-/skill:agent-teams Coordinate this OCR research-to-implementation handoff across repositories
+```sh
+./install.sh
 ```
 
-`agent-teams` is **instructional orchestration**, not a background service. The coordinator lives in the current Pi session. Durable work requires an existing issue/PR tracker or authorized ledger; long-running workers require explicitly managed sessions or a separate scheduler.
+For unattended or scripted installs, pass explicit flags:
 
-The installed `nathanstephenson/pi-subagents` extension gives subagents separate **context**, not automatic filesystem isolation. Parallel writers must use verified separate worktrees/sessions, otherwise serialize them. See [`skills/agent-teams/SKILL.md`](skills/agent-teams/SKILL.md) and its references.
+```sh
+./install.sh --harness pi --scope global --dry-run
+./install.sh --harness pi,claude --scope global
+./install.sh --harness claude --scope project --target /path/to/kanade
+./install.sh --harness pi --scope global --with-jev
+```
 
-## Existing Pi packages
+Global uses `~/.pi/agent` and `~/.claude`. Project uses `.pi/` and `.claude/` plus root instruction files. Existing instruction files are augmented inside a managed block, not overwritten. Existing user settings/models/packages are unchanged. Installation writes backups if replacing managed paths. The TUI includes a mandatory preview; `--dry-run` prints intended writes without changing anything in CLI mode. `--no-tui` disables interaction explicitly. `--with-jev` installs the optional Jev extension only after dependencies are built and configuration is supplied; read `extensions/k-jev/README.md`.
 
-- `pi-blackhole`
-- `pi-web-access`
-- `@narumitw/pi-chrome-devtools`
-- `@narumitw/pi-lsp`
-- `nathanstephenson/pi-subagents`
-- local `k-jev`
+Pi prerequisite: `pi install git:github.com/nathanstephenson/pi-subagents`. The installer checks that the package is configured but does not modify your package list automatically. For project agents, allow project agent discovery (`agentScope: "both"`) in the actual subagent call, where supported, and approve untrusted project agents when prompted.
 
-## Claude Code
+Recommended start: Pi with only read/discovery and the `subagent` tool enabled for Albert (`pi --tools read,grep,find,ls,subagent`). Confirm your extension registers `subagent` under that exact name. Do not globally remove write tools from Felix; child tools are defined by agent profiles. Claude's native Agent tool and permissions should likewise be set so the primary agent cannot write directly. Prompt-only read-only policies are not sandbox boundaries.
 
-Reuse `AGENTS.md` as `~/.claude/CLAUDE.md`, share skill directories where Claude discovers skills, adapt agent tool definitions where needed, and use `claude-settings.json` as settings. The Jev MCP server setup is documented in [`extensions/k-jev/README.md`](extensions/k-jev/README.md).
+## Installer verification
 
-The Pi `agent-teams` skill does not imply Claude Agent Teams are enabled, compatible with Pi subagents, or persistent between sessions.
+```sh
+./tests/install-e2e.sh
+python3 ./tests/tui-e2e.py
+```
 
-## Principles
+The terminal wizard does not depend on `gum`, `dialog`, or `whiptail`; it requires Bash and an interactive TTY. CI should use `--harness` / `--scope` flags.
 
-Simple work stays simple. Parallelize proven independence, never concurrent edits in one checkout. One accountable owner per task, one integration owner per repo, and independent evidence before completion. Do not invent status, costs, or test results.
+## Skills
+
+Five opt-in skills: `architecture`, `domain-modeling`, `ui-ux`, `documentation`, `research`. Their `SKILL.md` files are short; supporting content is under `references/`. All useful guidance from the old `unslop` is incorporated into documentation and role/reporting rules. REA is not bundled.
+
+## Model selection
+
+Models are not pinned in role definitions: model identifiers vary by provider and account. Set Albert to a strong reasoning model at high/max effort; Felix and Vera to strong code/review models at high effort; Nora and Iris to a more economical model when adequate. Your current Pi config uses Luna/Sol and Claude config selects Sonnet; keep those choices unless you deliberately change them.
+
+## Testing philosophy
+
+Use E2E/smoke checks as the first acceptance evidence. Write focused regression or invariant tests when the risk justifies them. No automatic unit tests for every edited function or coverage targets. Reviews are proportional to change risk. Never report unavailable checks as successful.
+
+## Migration from LazyGreed/.pi 1.2.0
+
+See `MIGRATION.md`. The supplied migration bundle replaces old agent and skill definitions but leaves your `settings.json`, `models.json`, `claude-settings.json`, `pi-blackhole`, and existing `k-jev` core untouched unless explicitly patched. Review removals before applying.

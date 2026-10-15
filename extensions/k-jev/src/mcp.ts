@@ -4,6 +4,8 @@ import * as z from "zod/v4";
 import { resolveConfig, safeError } from "./core/config.js";
 import { evaluate } from "./core/evaluate.js";
 import { search } from "./core/search.js";
+import { evaluateFiles } from "./core/files.js";
+import { evaluateDiff } from "./core/diff.js";
 
 const text = z.string().min(1).max(4096);
 const name = z.string().min(1).max(128);
@@ -102,6 +104,42 @@ export function createServer() {
       } catch (error) {
         return failure(error);
       }
+    },
+  );
+  server.registerTool(
+    "jev_evaluate_files",
+    {
+      description: "Evaluate 1-20 UTF-8 project-root files independently against typed questions. Sends file contents to configured Jev endpoint. Returns judgments only, never excerpts.",
+      inputSchema: z.strictObject({
+        paths: z.array(z.string().min(1).max(4096)).min(1).max(20),
+        questions: boundedRecord(questionSchema, 1, 64),
+      }),
+      annotations,
+    },
+    async (input, ctx) => {
+      try {
+        const cwd = process.env.CLAUDE_PROJECT_DIR ?? process.cwd();
+        const { usage: _, ...result } = await evaluateFiles(input, resolveConfig(), cwd, ctx.mcpReq.signal);
+        return { content: [{ type: "text", text: JSON.stringify(result) }], structuredContent: result };
+      } catch (error) { return failure(error); }
+    },
+  );
+  server.registerTool(
+    "jev_evaluate_diff",
+    {
+      description: "Evaluate tracked-file Git diff against base (default HEAD) using typed questions. Sends diff to configured endpoint; no untracked files.",
+      inputSchema: z.strictObject({
+        base: z.string().min(1).max(256).optional(),
+        questions: boundedRecord(questionSchema, 1, 64),
+      }),
+      annotations,
+    },
+    async (input, ctx) => {
+      try {
+        const cwd = process.env.CLAUDE_PROJECT_DIR ?? process.cwd();
+        const { usage: _, ...result } = await evaluateDiff(input, resolveConfig(), cwd, ctx.mcpReq.signal);
+        return { content: [{ type: "text", text: JSON.stringify(result) }], structuredContent: result };
+      } catch (error) { return failure(error); }
     },
   );
   return server;

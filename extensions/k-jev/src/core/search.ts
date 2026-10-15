@@ -26,7 +26,7 @@ function assertWithinRoot(path: string, root: string) {
     throw new JevError("k-jev: File is outside the allowed project root.");
 }
 
-async function readCandidate(
+export async function readCandidate(
   path: string,
   cwd: string,
   signal?: AbortSignal,

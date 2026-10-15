@@ -81,3 +81,13 @@ npx @modelcontextprotocol/inspector node dist/mcp.js
 ```
 
 Core owns validation independently of adapter schemas. Keep Pi, MCP, tool registration, and UI dependencies out of `src/core/`.
+
+## Added semantic tools (Albert opt-in)
+
+- `jev_evaluate_files`: Evaluate 1-20 UTF-8 text files against a common set of typed questions. Each file is evaluated independently; responses contain answers and paths, never file text. Files must resolve beneath the project root. Per-file read/judgment errors are reported independently.
+- `jev_evaluate_diff`: Evaluate the tracked Git diff against `HEAD` or a supplied base ref with typed questions. Includes staged and unstaged changes to tracked files; **does not include untracked files**. Diff size limit: 256 KiB. No changes to Git state.
+- Existing `jev_evaluate` and `jev_search` remain available and retain their schemas. Pi `jev_search` is now project-root confined like the MCP version.
+- New tools reuse the same configured Jev endpoint and same question/answer types. Judgment is probabilistic, not a deterministic verifier. Read relevant source and execute checks normally.
+- Enabling Jev sends source text/diffs to the configured endpoint. Exclude credentials, tokens, private customer documents, and proprietary code unless the endpoint and transmission are approved. Jev is never mandatory for reviews or acceptance.
+
+The agent adapter does not require Jev to launch. With opt-in, install/build the extension, configure `K_JEV_*` environment variables, and reload Pi or Claude. Node.js >=22.18 is required by the existing `k-jev` package.
