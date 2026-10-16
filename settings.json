@@ -1,9 +1,6 @@
 {
   "theme": "light/dark",
-  "enabledModels": [
-    "openai/gpt-6-luna",
-    "openai/gpt-6.1-sol"
-  ],
+  "enabledModels": [],
   "hideThinkingBlock": true,
   "steeringMode": "all",
   "followUpMode": "all",
@@ -18,12 +15,6 @@
   ],
   "doubleEscapeAction": "tree",
   "tuiMode": "fullscreen",
-  "defaultProvider": "openai",
-  "defaultModel": "gpt-6.1-sol",
-  "modelThinkingLevels": {
-    "openai/gpt-6-luna": "max",
-    "openai/gpt-6.1-sol": "high"
-  },
   "compaction": {
     "enabled": true,
     "reserveTokens": 32768,
@@ -33,7 +24,7 @@
     "npm:pi-blackhole",
     "npm:pi-web-access",
     "npm:@narumitw/pi-chrome-devtools",
-    "git:github.com/nathanstephenson/pi-subagents",
-    "npm:@narumitw/pi-lsp"
+    "npm:@narumitw/pi-lsp",
+    "npm:pi-subagents"
   ]
 }
