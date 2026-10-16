@@ -25,6 +25,6 @@
     "npm:pi-web-access",
     "npm:@narumitw/pi-chrome-devtools",
     "npm:@narumitw/pi-lsp",
-    "npm:pi-subagents"
+    "npm:@tintinweb/pi-subagents"
   ]
 }
