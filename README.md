@@ -2,6 +2,10 @@
 
 Harness-native engineering orchestrator for one repository at a time. Albert talks to the human, scopes tasks, delegates to four named subagents, and reports only supported outcomes. Albert never implements application code.
 
+## Workflow
+
+Open `pi` or `claude` as usual; Albert is loaded from native instructions. No Albert-specific runtime commands or UI. Express requests freely (e.g. “review changes”, “review updates”, “check the diff”). Albert selects the smallest agent path, dispatches background work when suitable, routes consequential review/E2E, and reports only evidenced results. See [the lifecycle and limits](docs/workflow.md).
+
 ## Agents
 
 - **Albert**: coordinator, installed as primary instructions (`AGENTS.md` for Pi; `CLAUDE.md` for Claude Code).
@@ -10,7 +14,7 @@ Harness-native engineering orchestrator for one repository at a time. Albert tal
 - **Vera**: independent consequential-change review.
 - **Iris**: observable E2E/smoke acceptance.
 
-Native delegation only: `nathanstephenson/pi-subagents` for Pi; built-in agents for Claude Code. No custom orchestration service, tmux dependency, database, or task logs.
+Native delegation: `@tintinweb/pi-subagents` (`Agent`, background by default) for Pi; built-in agents for Claude Code. No custom orchestration service, tmux dependency, database, or task logs.
 
 ## Install
 
@@ -31,9 +35,9 @@ For unattended or scripted installs, pass explicit flags:
 
 Global uses `~/.pi/agent` and `~/.claude`. Project uses `.pi/` and `.claude/` plus root instruction files. Existing instruction files are augmented inside a managed block, not overwritten. Existing user settings/models/packages are unchanged. Installation writes backups if replacing managed paths. The TUI includes a mandatory preview; `--dry-run` prints intended writes without changing anything in CLI mode. `--no-tui` disables interaction explicitly. `--with-jev` installs the optional Jev extension only after dependencies are built and configuration is supplied; read `extensions/k-jev/README.md`.
 
-Pi prerequisite: `pi install git:github.com/nathanstephenson/pi-subagents`. The installer checks that the package is configured but does not modify your package list automatically. For project agents, allow project agent discovery (`agentScope: "both"`) in the actual subagent call, where supported, and approve untrusted project agents when prompted.
+Pi prerequisite: `pi install npm:@tintinweb/pi-subagents` (if not already installed). The installer detects the package in Pi settings where possible and warns without changing package configuration. The extension discovers `.pi/agents/` and global agent profiles; no `agentScope` option required.
 
-Recommended start: Pi with only read/discovery and the `subagent` tool enabled for Albert (`pi --tools read,grep,find,ls,subagent`). Confirm your extension registers `subagent` under that exact name. Do not globally remove write tools from Felix; child tools are defined by agent profiles. Claude's native Agent tool and permissions should likewise be set so the primary agent cannot write directly. Prompt-only read-only policies are not sandbox boundaries.
+Pi uses the capitalized `Agent` tool, plus `get_subagent_result` and `steer_subagent`; keep them available to Albert. Felix retains writing tools in its own profile. Claude Code uses built-in agents. Prompt-only read-only policies are not sandbox boundaries. See `docs/workflow.md`.
 
 ## Installer verification
 

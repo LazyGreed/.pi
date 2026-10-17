@@ -13,6 +13,13 @@ printf '# Claude contract\nKeep this too.\n' > "$project/CLAUDE.md"
 "$root/install.sh" --harness pi,claude --scope project --target "$project" > "$tmp/initial"
 [[ -f "$project/.pi/agents/felix.md" && -f "$project/.claude/agents/vera.md" ]]
 [[ -f "$project/.pi/skills/ui-ux/SKILL.md" ]]
+grep -q '^name: felix$' "$project/.pi/agents/felix.md"
+grep -q '^disallowed_tools: edit, write$' "$project/.pi/agents/vera.md"
+grep -q '^disallowedTools: Write, Edit, NotebookEdit$' "$project/.claude/agents/vera.md"
+grep -q '@tintinweb/pi-subagents' "$tmp/initial"
+! grep -q 'nathanstephenson/pi-subagents' "$tmp/initial"
+grep -q 'run_in_background: true' "$project/AGENTS.md"
+grep -q 'steer_subagent' "$project/AGENTS.md"
 grep -q 'Keep this rule.' "$project/AGENTS.md"
 grep -q 'Keep this too.' "$project/CLAUDE.md"
 [[ "$(grep -c '<!-- ALBERT MANAGED START -->' "$project/AGENTS.md")" -eq 1 ]]

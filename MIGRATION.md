@@ -14,7 +14,7 @@ The migration retains your existing provider/model settings, Pi/Claude settings,
 2. Run `./install.sh --harness pi,claude --scope global --dry-run`.
 3. Run your chosen global or project install. Project mode modifies instruction files using managed markers and preserves existing text.
 4. Ensure `nathanstephenson/pi-subagents` is installed in Pi. Claude Code uses built-in agents.
-5. Run Pi with a restrictive Albert tool set where supported (`pi --tools read,grep,find,ls,subagent`). Ensure Felix retains independent tool capabilities in the child harness.
+5. Ensure `npm:@tintinweb/pi-subagents` is installed in Pi. The extension registers `Agent`, `get_subagent_result`, and `steer_subagent` (not `subagent`). If the old nathanstephenson package is installed, remove it separately after reviewing your Pi settings. Preserve Felix's independent write permissions.
 6. Select model and effort levels manually. Reload harnesses, confirm role discovery, test one scoped implementation + review + E2E handoff.
 
 ## Limits
@@ -24,3 +24,7 @@ The migration retains your existing provider/model settings, Pi/Claude settings,
 ## Validation
 
 The patch archive includes smoke tests for the installer. Jev source additions are syntactically checked, but full TypeScript typecheck and integration tests require the original npm dependencies (`cd extensions/k-jev && npm ci && npm run check`). Those dependencies are not embedded in this patch archive.
+
+## Workflow upgrade
+
+Albert now dispatches suitable work in the background, steers existing sessions, and performs bounded verification/review handoffs. No custom runtime commands are installed. Native Pi/Claude session restoration and GitHub task references are used when present; no task database is added.

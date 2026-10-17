@@ -119,6 +119,7 @@ install_role() {
   {
     printf -- '---\nname: %s\ndescription: %s\ntools: %s\n' "$role" "$desc" "$tools"
     if [[ "$tool" == claude && "$role" != felix ]]; then printf 'disallowedTools: Write, Edit, NotebookEdit\n'; fi
+    if [[ "$tool" == pi && "$role" != felix ]]; then printf 'disallowed_tools: edit, write\n'; fi
     printf -- '---\n\n'
     cat -- "$source_dir/agents/$role.md"
   } > "$temp"
@@ -172,8 +173,24 @@ install_one() {
   fi
 }
 
+# Advisory only: the installed package may also be supplied through a Pi extension path.
+check_pi_subagents() {
+  local global_settings="${PI_CODING_AGENT_DIR:-$HOME/.pi/agent}/settings.json"
+  local project_settings=""
+  [[ "$scope" != project ]] || project_settings="$target/.pi/settings.json"
+  local configured=0 legacy=0 file
+  for file in "$global_settings" "$project_settings"; do
+    [[ -n "$file" && -f "$file" ]] || continue
+    if grep -Fq '@tintinweb/pi-subagents' "$file"; then configured=1; fi
+    if grep -Fq 'nathanstephenson/pi-subagents' "$file"; then legacy=1; fi
+  done
+  if ((legacy)); then report 'NOTICE: old nathanstephenson/pi-subagents is configured; remove it manually to avoid overlapping agent tools.'; fi
+  if ((!configured)); then report 'NOTICE: tintinweb package not found in checked Pi settings; confirm `npm:@tintinweb/pi-subagents` is installed (custom extension paths may not appear there).'; fi
+}
+
 has_harness pi && install_one pi
 has_harness claude && install_one claude
+has_harness pi && check_pi_subagents
 
 if ((with_jev)); then
   jev="$source_dir/extensions/k-jev"
@@ -190,12 +207,22 @@ if ((with_jev)); then
     else report 'MANUAL: install Pi and run pi install /path/to/extensions/k-jev'; fi
   fi
   if has_harness claude; then
-    if ((dry)); then report "RUN claude mcp add --scope $([[ "$scope" == global ]] && echo user || echo project) --transport stdio k-jev -- node $jev/dist/mcp.js";
+    if ((dry)); then report "CHECK claude mcp get k-jev; add only if absent (scope $([[ "$scope" == global ]] && echo user || echo project))";
     elif command -v claude >/dev/null; then
+      # Preserve existing registrations (including those from another scope).
+      # A registered MCP server must not be replaced as a side effect of installation.
       if [[ "$scope" == project ]]; then
-        (cd "$target" && claude mcp add --scope project --transport stdio k-jev -- node "$jev/dist/mcp.js")
+        if (cd "$target" && claude mcp get k-jev >/dev/null 2>&1); then
+          report 'SKIP CLAUDE MCP: k-jev already registered; existing configuration preserved.'
+        else
+          (cd "$target" && claude mcp add --scope project --transport stdio k-jev -- node "$jev/dist/mcp.js")
+        fi
       else
-        claude mcp add --scope user --transport stdio k-jev -- node "$jev/dist/mcp.js"
+        if claude mcp get k-jev >/dev/null 2>&1; then
+          report 'SKIP CLAUDE MCP: k-jev already registered; existing configuration preserved.'
+        else
+          claude mcp add --scope user --transport stdio k-jev -- node "$jev/dist/mcp.js"
+        fi
       fi
     else report 'MANUAL: install Claude Code and register the k-jev MCP server'; fi
   fi
@@ -203,6 +230,6 @@ if ((with_jev)); then
 fi
 
 report 'SET MODELS manually: Albert high/max reasoning; Felix/Vera strong code model, high; Nora/Iris task-appropriate.'
-report 'PI: ensure nathanstephenson/pi-subagents is installed; enable project agents in the subagent call if applicable.'
-report 'Albert tool restriction (Pi): pi --tools read,grep,find,ls,subagent (verify local tool names first).'
+report 'PI: use @tintinweb/pi-subagents: Agent, get_subagent_result, steer_subagent. Background delegation supported; no Albert runtime commands.'
+report 'PI: if restricting parent tools, retain Agent/get_subagent_result/steer_subagent; Felix keeps separate write tools.'
 report 'DONE'
